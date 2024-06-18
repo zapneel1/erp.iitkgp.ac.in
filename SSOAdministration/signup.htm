@@ -1,0 +1,495 @@
+
+<html>
+    <head>
+        <title>Signup @ ERP System, IIT Kharagpur</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+        
+        <script src="jquery/jquery-1.10.2.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <script>
+            $(function() {
+                var request = $.ajax({
+                    url: "getStakeholderTypes.htm",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    success: function( json ) {
+                        $.each(json, function(index, item){
+                            $("#user_type_desc").append("<option value="+item.UserType+">"+item.UserTypeDesc+"</option>");
+                        });
+                    }
+                });
+            });
+            
+            function getCaptcha(){
+                var request = $.ajax({
+                    url: "getCaptcha.htm",
+                    type: "POST",
+                    cache: false,
+                    dataType: "text",
+                    success: function( response ) {
+                        $('#captcha').attr('src','PassImageServlet/'+response);
+                    }
+                });
+            }
+            
+            
+            $(function() {
+                getCaptcha();
+            });
+            
+            $(function() {
+                $("#user_type_desc").on('change', function() {
+                    $("#user_name").val("");
+                    $("#user_code").val("");
+                    $("#alias").val("");
+                    var user_type_desc_val = $("#user_type_desc").val();
+                    if(user_type_desc_val === 'NA'){
+                        $("#newadmission_div").removeClass('hidden');
+                        $("#user_detail_code_div").addClass('hidden');
+                        $("#newaddregno").prop('required',true);
+                        $("#user_detail_code").prop('required',false);
+                    }
+                    else{
+                        $("#newadmission_div").addClass('hidden');
+                        $("#user_detail_code_div").removeClass('hidden');
+                        $("#newaddregno").prop('required',false);
+                        $("#user_detail_code").prop('required',true);
+                    }
+                    
+                    if(user_type_desc_val !== ""){
+                        var request = $.ajax({
+                            url: "getDBSecurityQues.htm",
+                            type: "POST",
+                            cache: false,
+                            data: "user_type="+user_type_desc_val,
+                            dataType: "text",
+                            success: function( response ) {
+                                if(response !== ''){
+                                    var arr = response.split(";");
+                                    var inhtml = "";
+                                    for(var i=0; i<arr.length; i++){
+                                        var arr1 = arr[i].split(":");
+                                        var html = "<div class='form-group'>" +
+                                                   "<label for='dbQuesAns"+arr1[0]+"' class='col-lg-5 control-label'>"+arr1[1]+"</label>" +
+                                                   "<div class='col-lg-5'>" +
+                                                   "<input class='form-control hidden' id='dbQuesId"+arr1[0]+"' name='dbQuesId' placeholder='Question ID' value='"+arr1[0]+"' readonly type='text' required>" +
+                                                   "<input class='form-control' id='dbQuesAns"+arr1[0]+"' name='dbQuesAns' placeholder='Enter answer here' type='text' required>" +
+                                                   "</div>" +
+                                                   "</div>";
+                                        inhtml += html;
+                                    }
+                                    $("#dbSecQuesDIV").html(inhtml);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+            
+            function loadUserDetails(){
+                var user_type_desc_val = $("#user_type_desc").val();
+                var user_detail_code = $("#user_detail_code").val();
+                if(user_detail_code.length > 4){
+                    var request = $.ajax({
+                        url: "getUserDetails.htm",
+                        type: "POST",
+                        cache: false,
+                        data: "user_type="+user_type_desc_val+"&user_code="+user_detail_code,
+                        dataType: "text",
+                        success: function( response ) {
+                            var arr = response.split(":");
+                            if(arr[0] === "ERROR"){
+                                $("#user_name").val("");
+                                $("#user_code").val("");
+                                $("#alias").val("");
+                                $("#msg").text(arr[1]);
+                                $("#msg_div").removeClass("hidden");
+                                $("#submit_btn").addClass("hidden");
+                                return false;
+                            }else{
+                                $("#user_name").val(arr[1]);
+                                $("#user_code").val(user_detail_code);
+                                $("#alias").val(user_detail_code);
+                                $("#msg").text("");
+                                $("#msg_div").addClass("hidden");
+                                $("#submit_btn").removeClass("hidden");
+                            }
+                        }
+                    });
+                }
+                else{
+                    return false;
+                }
+            }
+            
+            $(function() {
+                $("#user_detail_code").blur(function() {
+                    loadUserDetails();
+                });
+            });
+            
+            $(function() {
+                $("#newaddregno").blur(function() {
+                    var newaddentexam = $('input:radio[name=newaddentexam]:checked');
+                    if(newaddentexam.length === 0){
+                        $("#msg").text("Select any of the entrance exam");
+                        $("#msg_div").removeClass("hidden");
+                    }
+                    else{
+                        $("#user_detail_code").val(newaddentexam.val()+$("#newaddregno").val());
+                        loadUserDetails();
+                    }
+                });
+            });
+            
+            //Password validation
+            $(function() {
+                $("#password1").blur(function() {
+                    if($("#password1").val() !== ""){
+                        if($("#password1").val().length < 8)
+                        {
+                            $("#password_msg").html('Password should be minimum 8 character length');
+                            $("#password_msg").removeClass("hidden");
+                        }
+                        else{
+                            $("#password_msg").html('');
+                            $("#password_msg").addClass("hidden");
+                        }
+                    }
+                });
+            });
+            
+            $(function() {
+                $("#confirm_password").blur(function() {
+                    if($("#confirm_password").val() !== ""){
+                        if($("#password1").val() !== $("#confirm_password").val())
+                        {
+                            $("#password_msg").html('Confirm password does not match with passowrd');
+                            $("#password_msg").removeClass("hidden");
+                            $("#confirm_password").val('');
+                            $("#aliaspassword").val('');
+                            $("#confirmaliaspassword").val('');
+                        }
+                        else{
+                            $("#password_msg").html('');
+                            $("#password_msg").addClass("hidden");
+                            $("#aliaspassword").val($("#password1").val());
+                            $("#confirmaliaspassword").val($("#password1").val());
+                        }
+                    }
+                });
+            });
+            
+            $(function() {
+                $("#aliaspassword").blur(function() {
+                    if($("#aliaspassword").val().length < 8)
+                    {
+                        $("#aliaspassword_msg").html('Passphrase should be minimum 8 character length');
+                        $("#aliaspassword_msg").removeClass("hidden");
+                    }
+                    else{
+                        $("#aliaspassword_msg").html('');
+                        $("#aliaspassword_msg").addClass("hidden");
+                    }
+                });
+            });
+            
+            $(function() {
+                $("#confirmaliaspassword").blur(function() {
+                    if($("#aliaspassword").val() !== $("#confirmaliaspassword").val())
+                    {
+                        $("#aliaspassword_msg").html('Confirm passphrase does not match with passphrase');
+                        $("#aliaspassword_msg").removeClass("hidden");
+                        $("#confirmaliaspassword").val('');
+                    }
+                    else{
+                        $("#aliaspassword_msg").html('');
+                        $("#aliaspassword_msg").addClass("hidden");
+                    }
+                });
+            });
+            
+           
+            $(function () {
+                $('#dob_div').datetimepicker();
+            });
+            
+            $(function() {
+                $("#form").submit(function(event) {
+                    
+                    event.preventDefault();
+                    var postData = $(this).serialize();
+                    var request = $.ajax({
+                        url: "createAccount.htm",
+                        type: "POST",
+                        cache: false,
+                        data: postData,
+                        dataType: "text",
+                        success: function( response ) {
+                            var arr = response.split(":");
+                            if(arr[0] === "ERROR"){
+                                $("#status_msg").text(arr[1]);
+                                $("#status_msg_div").removeClass("hidden");
+                                $("#status_msg_div").addClass("alert-danger");
+                            }else if(arr[0] === "SUCCESS"){
+                                $("#status_msg").text(arr[1]);
+                                $("#status_msg_div").removeClass("hidden");
+                                $("#status_msg_div").addClass("alert-success");
+                                $('#form')[0].reset();
+                                //$('#user_type_desc').addClass("focus");
+                            }
+                        }
+                    });
+                });
+            });
+            
+            $(function() {
+                $("#newaddentexamjee").click(function() {
+                    $("#newaddregno").attr("placeholder", "JEE(Adv) Roll No").placeholder();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="well">
+            <form id='form' class="form-horizontal" method="post" action="https://erp.iitkgp.ac.in/SSOAdministration/createAccount.htm">
+                <fieldset>
+                    <legend>New User Sign Up</legend>
+                    <div id="alert_div" class="alert alert-warning">
+                        <strong><label id="alert_msg">Please do not use special character like ' / " \ % </label></strong>
+                        <strong><label class="text-danger">New admittees: Please select New Admission as stakeholder type.</label></strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_type_desc" class="col-lg-3 control-label">Stakeholder Type</label>
+                        <div class="col-lg-7">
+                            <select class="form-control" id="user_type_desc" name="user_type_desc" required>
+                                <option value="">Please Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="newadmission_div" class="hidden">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Entrance Exam</label>
+                            <div class="col-lg-9">
+                                <div class="col-lg-12">
+                                    <label class="control-label">Preparatory</label>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="col-lg-12">
+                                        <div class="radio">
+                                            <label><input name="newaddentexam" id="newaddentexam1" value="NEWPREP" type="radio">NEWPREP</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label class="control-label">Undergraduate/2Yr. M.Sc</label>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="col-lg-12">
+                                        <div class="radio">
+                                            <label><input name="newaddentexam" id="newaddentexamjee" value="JEE" type="radio">JEE</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="JAM" type="radio">JAM</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="PREP" type="radio">PREP</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="FX" type="radio">FX</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="FUG" type="radio">FUG</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="JPRGUG" type="radio">JPRGUG</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="BSCBED" type="radio">NCET</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label class="control-label">Postgraduate</label>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="col-lg-12">
+                                        <div class="radio">
+                                            <label><input name="newaddentexam" id="newaddentexam1" value="GATE" type="radio">GATE</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="MBA" type="radio">MBA</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="MHRM" type="radio">MHRM</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="DEF" type="radio">DEF</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="MMST" type="radio">MMST</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="LLB" type="radio">LLB</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="LLM" type="radio">LLM</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="SPON" type="radio">SPON</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="QIP" type="radio">QIP</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="EMBA" type="radio">EMBA</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="JPRG" type="radio">JPRG</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="FEX" type="radio">FEX</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="FPG" type="radio">FPG</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label class="control-label">Research</label>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="col-lg-12">
+                                        <div class="radio">
+                                            <label><input name="newaddentexam" id="newaddentexam1" value="MS"  type="radio">MS</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="PHD" type="radio">PHD</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="PDF" type="radio">PDF</label>
+                                            <label><input name="newaddentexam" id="newaddentexam2" value="CER" type="radio">CER</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newaddregno" class="col-lg-3 control-label">Your Reg/Appl No</label>
+                            <div class="col-lg-7">
+                                <input class="form-control" id="newaddregno" name="newaddregno" placeholder="Appl No/Reg No" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div id='user_detail_code_div' class="form-group">
+                        <label for="user_detail_code" class="col-lg-3 control-label">Stakeholder Code</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="user_detail_code" name="user_detail_code" placeholder="Emp Code/Rollno etc (as applicable)" type="text">
+                        </div>
+                    </div>
+                    <div id="msg_div" class="alert alert-dismissable alert-danger hidden">
+                        <strong><label id="msg"></label></strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_name" class="col-lg-3 control-label">Stakeholder Name</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="user_name" name="user_name" placeholder="Your Name" readonly type="text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_code" class="col-lg-3 control-label">Your Login Id</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="user_code" name="user_code" placeholder="Your Login Id" readonly type="text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1" class="col-lg-3 control-label">Password</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="password1" name="password1" placeholder="Enter your new password here" type="password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" class="col-lg-3 control-label">Confirm Password</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter your new password here" type="password" required>
+                        </div>
+                    </div>
+                    <div id="password_msg" class="alert alert-danger hidden"></div>
+                    <legend>Digital Signature Information</legend><br>
+                    <div class="form-group">
+                        <label for="alias" class="col-lg-3 control-label">Alias</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="alias" name="alias" placeholder="Your alias (same as login id)" type="text" readonly required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aliaspassword" class="col-lg-3 control-label">Passphrase</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="aliaspassword" name="aliaspassword" placeholder="Enter your passphrase here" type="password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmaliaspassword" class="col-lg-3 control-label">Confirm Passphrase</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="confirmaliaspassword" name="confirmaliaspassword" placeholder="Re-enter your new passphrase here" type="password" required>
+                        </div>
+                    </div>
+                    <div id="aliaspassword_msg" class="alert alert-danger hidden"></div>
+                    <legend>Information for Verification</legend><br>
+                    <div class="form-group">
+                        <label for="dob" class="col-lg-3 control-label">Date of birth (DD-MM-YYYY)</label>
+                        <div id="datetimepicker4" class="input-append col-lg-7">
+                            <input id='dob' name="dob" class="add-on form-control" data-format="dd-MM-yyyy" type="text" placeholder="Click here to get calendar" required></input>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                      $(function() {
+                        $('#datetimepicker4').datetimepicker({
+                          pickTime: false
+                        });
+                      });
+                    </script>
+                    <div id="dbSecQuesDIV"></div>
+                    <legend>Security Questions</legend><br>
+                    <div class="row-fluid">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input class="form-control" id="question1" name="question" placeholder="First question" type="text" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input class="form-control" id="answer1" name="answer" placeholder="Answer of first question" type="password" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input class="form-control" id="question2" name="question" placeholder="Second question" type="text" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input class="form-control" id="answer2" name="answer" placeholder="Answer of second question" type="password" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input class="form-control" id="question3" name="question" placeholder="Third question" type="text" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input class="form-control" id="answer3" name="answer" placeholder="Answer of third question" type="password" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <legend>Confirm</legend><br>
+                    <div class="form-group">
+                        <!--label for="passline" class="col-lg-3 control-label">Captcha</label-->
+                        <img id='captcha' class="col-lg-4" style='padding-top: 0px'/>
+                        <div class="col-lg-7">
+                            <input class="form-control" id="passline" name="passline" placeholder="Enter the captcha text(shown in the image)" type="text" required>
+                        </div>
+                        <div class="col-lg-1">
+                            <label onclick='getCaptcha();' style='cursor: pointer'><i class="fa fa-lg fa-refresh"></i></label>
+                        </div>
+                        
+                    </div>
+                    <div id="status_msg_div" class="alert hidden">
+                        <strong><label id="status_msg"></label></strong>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-7  col-lg-offset-5">
+                            <button id="submit_btn" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+                </div>
+        </div>
+    </body>
+</html>

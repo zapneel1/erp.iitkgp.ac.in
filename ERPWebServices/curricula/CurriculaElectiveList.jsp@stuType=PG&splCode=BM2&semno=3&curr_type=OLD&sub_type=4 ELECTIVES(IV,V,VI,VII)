@@ -1,0 +1,698 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="StyleSheet" href="../css/style.css">
+        <title>Elective List</title>
+        <script type="text/javascript">
+
+            function callFile(pageno, fileFullPath, doc) {
+
+                //document.forms['letter-form'].action='http://10.57.4.65:8080/StudentPerformanece/commonFileDownloader.jsp';
+                //document.forms['perform-form'].action='https://erp.iitkgp.ernet.in/StudentPerformance/commonFileDownloader.jsp';
+                document.forms['perform-form'].action = 'commonFileDownloader.jsp';
+                document.forms['perform-form'].elements['fileFullPath'].value = fileFullPath;
+                document.forms['perform-form'].elements['pageno'].value = pageno;
+                document.forms['perform-form'].elements['docId'].value = doc;
+
+                document.forms['perform-form'].submit();
+
+            }
+        </script>
+    </head>
+    <body>
+        
+        <table width="100%" cellpadding="1" cellspacing="1" border="0" bgcolor="#e0ecff">
+            
+            <tr><td colspan="5" style="background-color: skyblue"><b>List of Available Subjects for ELECTIVE- IV,V,VI,VII</b></td></tr>
+            <tr>
+                <td width="50px" nowrap></td>
+                <td width="50px" nowrap><b>Subject No</b></td>
+                <td width="50px" nowrap><b>Subject Name</b></td>
+                <td width="50px" nowrap><b>L-T-P</b></td>
+                <td width="50px" nowrap><b>Credit</b></td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/AI61002//AI61002_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>DEEP LEARNING FOUNDATIONS AND APPLICATIONS</td>
+                <td style="background-color: white" nowrap>48</td>
+                <td style="background-color: white" nowrap>4.8</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/AI61002//AI61002_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>DEEP LEARNING FOUNDATIONS AND APPLICATIONS</td>
+                <td style="background-color: white" nowrap>48</td>
+                <td style="background-color: white" nowrap>4.8</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM12//BAIIM12_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>CONSUMER ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM12//BAIIM12_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>CONSUMER ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM13//BAIIM13_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>APPLIED MARKETING RESEARCH</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM13//BAIIM13_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>APPLIED MARKETING RESEARCH</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM14//BAIIM14_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>FINANCIAL RISK MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM14//BAIIM14_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>FINANCIAL RISK MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM15//BAIIM15_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>FINANCIAL STATEMENT ANALYSIS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM15//BAIIM15_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>FINANCIAL STATEMENT ANALYSIS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM16//BAIIM16_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>COMPUTATIONAL FINANCE</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM16//BAIIM16_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>COMPUTATIONAL FINANCE</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM17//BAIIM17_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>HIGH FREQUENCY FINANCE AND NEWS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM17//BAIIM17_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>HIGH FREQUENCY FINANCE AND NEWS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM18//BAIIM18_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ADVANCED SPEADSHEET MODELING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM18//BAIIM18_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ADVANCED SPEADSHEET MODELING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM19//BAIIM19_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>BUSINESS PROCESS MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM19//BAIIM19_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>BUSINESS PROCESS MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM20//BAIIM20_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>PRICING AND REVENUE OPTIMIZATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM20//BAIIM20_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>PRICING AND REVENUE OPTIMIZATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM21//BAIIM21_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ANALYTICAL TOOLS IN DEMAND MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM21//BAIIM21_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ANALYTICAL TOOLS IN DEMAND MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM22//BAIIM22_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>MANUFACTURING ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM22//BAIIM22_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>MANUFACTURING ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM23//BAIIM23_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>LEGAL ASPECTS OF DATA MINING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM23//BAIIM23_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>LEGAL ASPECTS OF DATA MINING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM24//BAIIM24_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ANALYTICS IN BUSINESS FORECASTING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM24//BAIIM24_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ANALYTICS IN BUSINESS FORECASTING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM25//BAIIM25_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>SELECTED ASPECTS OF ADVANCED PREDICTIVE MODELING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM25//BAIIM25_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>SELECTED ASPECTS OF ADVANCED PREDICTIVE MODELING</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM26//BAIIM26_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ECONOMETRIC METHODS WITH APPLICATIONS IN BUSINESS ECONOMICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM26//BAIIM26_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ECONOMETRIC METHODS WITH APPLICATIONS IN BUSINESS ECONOMICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM28//BAIIM28_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ANALYTICS IN PAYMENTS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM28//BAIIM28_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>ANALYTICS IN PAYMENTS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>NAVIGATING THE WORKPLACE</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>NAVIGATING THE WORKPLACE</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM31//BAIIM31_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>DECISIONS AND GAMES</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM31//BAIIM31_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>DECISIONS AND GAMES</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM32//BAIIM32_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>GAMES AND INFORMATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM32//BAIIM32_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>GAMES AND INFORMATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM34//BAIIM34_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>NETWORKS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM34//BAIIM34_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>NETWORKS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>CONSUMER BEHAVIOUR</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>CONSUMER BEHAVIOUR</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>BAYESIAN METHODS FOR BUSINESS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>BAYESIAN METHODS FOR BUSINESS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>INTERCULTURAL BUSINESS COMMUNICATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+                <td style="background-color: white" nowrap>INTERCULTURAL BUSINESS COMMUNICATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BMIIM36//BMIIM36_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>LEADING PROFESSIONAL TEAMS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BMIIM36//BMIIM36_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+                <td style="background-color: white" nowrap>LEADING PROFESSIONAL TEAMS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+        </table>
+        
+    </body>
+    <form name="perform-form" target="_blank" id="perform-form" action="CurriculaElectiveList.jsp@stuType=PG&amp;splCode=BM2&amp;semno=3&amp;curr_type=OLD&amp;sub_type=4&#32;ELECTIVES(IV,V,VI,VII)" method="POST">
+        <input type="hidden" name="rollno" value="" />
+        <input type="hidden" name="fileFullPath" value="" />
+        <input type="hidden" name="pageno" value="" />
+        <input type="hidden" name="docId" value="" />
+    </form>
+</html>

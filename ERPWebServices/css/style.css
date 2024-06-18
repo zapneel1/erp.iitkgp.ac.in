@@ -1,0 +1,174 @@
+/* CSS Document */
+/* 		CSS For body Element		*/
+BODY{
+	/*background-color:#FFFFFF;*/
+	background-color:#efeefe;
+        font-family: 'Courier New',Courier,monospace;
+}
+TD {
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:normal;
+	font-style:normal;
+	color:#060976;
+}
+TH{
+	background-color:#557CD7;
+  	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-style:normal;
+	color:#FFFFFF;	
+}
+FIELDSET{
+	border : 1px MAROON solid;
+	width:inherit;
+	overflow:auto;
+}
+LEGEND{
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:16px;
+		font-size-adjust:inherit;
+		font-style:normal;
+		font-weight:bold;
+		font-stretch:normal;
+		font-variant:normal;
+		color:MAROON;
+		float:left;
+}
+TD.formlabel {
+	font-size : 12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-style : normal;
+	color : Maroon;
+	text-align : left;
+}
+.Link
+	{
+			font-size:10.0pt;
+			font-family:"Times New Roman";
+			font-weight:bold;
+			cursor:pointer;
+			color:MAROON;
+			text-decoration:underline;
+			padding-left:15px;
+			padding-right:15px;
+	}
+
+A:link{
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-style:normal;
+		font-weight:normal;
+		color:#333300;
+		text-decoration:none;
+		cursor:pointer;
+}
+A:visited{
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-style:normal;
+		font-weight:normal;
+		color:#333300;
+		text-decoration:none;
+		cursor:pointer;		
+}
+A:active{
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-style:normal;
+		font-weight:normal;
+		color:MAROON;
+		text-decoration:none;
+		cursor:pointer;		
+}
+A:hover{
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-style:normal;
+		font-weight:normal;
+		color:MAROON;
+		text-decoration:underline;
+		cursor:pointer;		
+}
+/*INPUT[type="text"],INPUT[type="password"],TEXTAREA,SELECT{
+		border:1px solid #23448F;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-weight:normal;
+		color:#000000;
+}
+INPUT[TYPE="submit"],INPUT[TYPE="button"],INPUT[TYPE="reset"]{
+		border:1px solid #000099;
+		background-color:#A0BED3;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-weight:bold;
+		padding:3px;
+		cursor:pointer;
+		border-spacing:inherit;
+}*/
+INPUT.button {
+	border:2px solid #000099;
+        border-top:1px solid #000099;
+        border-left:1px solid #000099;
+	/*background-color:#557CD7;*/
+        /*background-color:#003366;*/
+        background-color:#ffffcc;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	padding:1px;
+	cursor:pointer;
+	border-spacing:inherit;
+	color:#494967;
+}
+
+input.activated_module_button {
+            border:2px solid #000099;
+            border-top:1px solid #000099;
+            border-left:1px solid #000099;
+            background-color:#ff9900;
+            font-family:Verdana, Arial, Helvetica, sans-serif;
+            font-size:12px;
+            font-weight:bold;
+            padding:1px;
+            cursor:pointer;
+            border-spacing:inherit;
+            color:#000000;
+        }
+
+h3.header {
+	font-size:20px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-style:normal;
+	color:Blue;
+	text-align:center;
+}
+h1.confirmheader {
+  	font-size:14px;
+	font-family:Ms sans-serif;
+	font-weight:bold;
+	font-style:normal;
+	color:Maroon;
+	font:Ms sans-serif;
+}
+.tableheader {
+  	background-color:#557CD7;
+  	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-style:normal;
+	color:#FFFFFF;
+}
+
+.searchbgcolor {
+		background-color:#FAE985;
+        color:Maroon;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		font-weight:bold;
+		color:#000033;
+}

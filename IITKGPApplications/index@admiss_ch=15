@@ -1,0 +1,155 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>IIT-KGP</title>        
+    </head>
+    <body>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="border: 0px">
+                    <img height="120px" width="260px" src="images/top_img.jpg"/>
+                    <img src="images/top_img_banner.gif"/>
+                </td>
+                <td>
+                    <!-- START ENTRUST.NET SEAL CODE --> 
+                    <script type="text/javascript"> 
+                              (function(d, t) { 
+                                    var s = d.createElement(t), options = {'domain':'*.iitkgp.ac.in','style':'9','container':'entrust-net-seal'}; 
+                                    s.src = 'https://seal.entrust.net/sealv2.js'; 
+                                    s.async = true; 
+                                    var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr); 
+                                    s.onload = s.onreadystatechange = function() { 
+                                    var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return; 
+                                    try{goEntrust(options)} catch (e) {} }; 
+                                    })(document, 'script'); 
+                    </script> 
+                    <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Entrust SSL for secure e-commerce and confidential communications.">
+                        <tr>
+                            <td width="135" align="center" valign="top">
+                                    <div id="entrust-net-seal"><a href="https://www.entrust.com/ssl-certificates/"></a></div> 
+                                    <a target="_blank"  style="color:#000000; text-decoration:none; font:bold 9px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">About SSL Certificate</a>
+                            </td>						
+                        </tr>
+                    </table>
+                    <!-- END ENTRUST.NET SEAL CODE -->
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
+
+
+
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>IIT-KGP</title>
+        <link rel="stylesheet" href="JQGridCommon/css/jquery-ui-1.10.3.custom.css">
+        <link href="css/style1_1.css" rel="stylesheet" type="text/css" />
+        <script src="JQGridCommon/js/jquery-1.9.1.js"  type="text/javascript"></script>
+        <script src="JQGridCommon/js/jquery-ui.js"  type="text/javascript"></script>
+        <script>
+            function resizeIframe(obj)
+            {
+                obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+            }
+            function openBrochure(ses_sem)
+            {
+                var page = "/IITKGPApplications/admfile/" + ses_sem + "Brochure.pdf";
+                var $dialog = $('<div></div>')
+                        .html('<iframe style="border: 0px; " src="https://erp.iitkgp.ac.in/IITKGPApplications/'&#32;+&#32;page&#32;+&#32;'" width="100%" height="100%"></iframe>')
+                        .dialog({
+                            autoOpen: false,
+                            modal: true,
+                            height: 500,
+                            width: 1200,
+                            title: "Brochure"
+                        });
+                $dialog.dialog('open');
+            }
+            function openInform(ses_sem)
+            {
+                var page = "/IITKGPApplications/admfile/" + ses_sem + "Information.pdf";
+                var $dialog = $('<div></div>')
+                        .html('<iframe style="border: 0px; " src="https://erp.iitkgp.ac.in/IITKGPApplications/'&#32;+&#32;page&#32;+&#32;'" width="100%" height="100%"></iframe>')
+                        .dialog({
+                            autoOpen: false,
+                            modal: true,
+                            height: 500,
+                            width: 1200,
+                            title: "Information pertaining to Online Application Process"
+                        });
+                $dialog.dialog('open');
+            }
+        </script>
+        <link rel="StyleSheet" href="css/style1_1.css">        
+    </head>
+    <body>    
+        
+        <input type="hidden" name="mode" id="mode">
+        <input type="hidden" name="data_id" id="data_id">
+        <script>
+            $(function () {
+                var adm_ch = 15;
+                if (adm_ch == '01' || adm_ch == '44')
+                {
+                    var sess_sem = 20231;
+                    $.ajax({
+                        url: "generateCandidateListLink.htm",
+                        type: "POST",
+                        cache: false,
+                        async: false,
+                        data: {sess_sem: sess_sem},
+                        success: function (json) {
+                            //alert("json " +json);
+                            if (json.offer_letter_cnt > 0)
+                            {
+                                var html_txt = '<a href="candidateList@type=ol" target="_blank">Provisionally Selected Candidates</a>';
+                                $("#short_sel_link").html(html_txt);
+
+                            } else if (json.call_letter_cnt > 0) {
+                                var html_txt = '<a href="candidateList@type=cl" target="_blank">Provisionally Shortlisted Candidates</a>';
+                                $("#short_sel_link").html(html_txt);
+                            }
+                        },
+                        error: function (json) {
+                        },
+                    });
+                }
+            });
+        </script>
+        <!--<center><iframe id="id_admfile" frameBorder="0" scrolling="no" width="100%" onload='javascript:resizeIframe(this);'></iframe></center>-->
+    <center><div id="short_sel_link"></div></center>
+
+    <br><div class="heading" style="padding-top: 10px;padding-bottom: 10px;text-align: center;color: black;background-color: lightgrey;">
+        Application for Admission to Executive MBA (EMBA) Programme at Vinod Gupta School of Management for 2024-2027 Batch        
+    </div>
+    <div class="heading" style="padding-top: 10px;padding-bottom: 10px;text-align: center;color: green;">
+        Portal is currently closed
+    </div>   
+    <table width="50%" align="center" id="table-instruction" cellspacing="2" cellpadding="2">
+        <tr>
+            <td colspan="2">
+                <div style="padding: 10px; text-align: left; color: darkmagenta; font: bold">
+                    
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--    <div class="heading" style="padding-left: 100px; padding-right: 100px; text-align: left; color: darkmagenta;">
+    
+</div>-->
+    <br>           
+    <center><br>&nbsp;&nbsp;<b>This portal closed.</b></center>
+
+</body>
+
+</html>

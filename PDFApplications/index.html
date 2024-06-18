@@ -1,0 +1,132 @@
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <link rel="StyleSheet" href="css/style1.css">
+        <title>Admission(IIT-KGP)</title>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+        <script language="javascript" type="text/javascript">
+        
+        function signUp()
+        {
+            window.location.href='SignUP.jsp';
+        }
+        function isValidEmailAddress(emailAddress)
+        {
+ 		var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+ 		return pattern.test(emailAddress);
+	}
+
+        $(document).ready(function() {
+
+		$("#email").keyup(function(){
+
+			var email = $("#email").val();
+
+			if(email != 0)
+			{
+				if(isValidEmailAddress(email))
+				{
+					$("#validEmail").css({
+						"background-image": "url('img/validYes.png')"
+					});
+				} else {
+					$("#validEmail").css({
+						"background-image": "url('img/validNo.png')"
+					});
+				}
+			} else {
+				$("#validEmail").css({
+					"background-image": "none"
+				});
+			}
+
+		});
+
+	});
+
+        function checkdata()
+        {
+                $('.span_er').each(function(){
+                        $(this).html('');
+                });
+
+
+                if($("#email").val()=='')
+                {
+                        $('#email_span').html('Please Enter Your Email');
+                        $("#email").focus();
+                        $('#email').addClass("error");
+                }
+                if(($("#email").val()!='') && !(isValidEmailAddress($("#email").val())))
+                {
+                        $('#email_span').html('Please Enter Your Email Correctly');
+                        $("#email").focus();
+                        $('#email').addClass("error");
+                }
+                if($("#password").val()=='')
+                {
+                        $('#password_span').html('Please Enter Your Password');
+                        $("#password").focus();
+                        $('#password').addClass("error");
+                }
+
+                var flag='0';
+                $('.span_er').each(function(){
+                        if($(this).html()!='')
+                        {
+                                flag='1';
+                        }
+                });
+                if(flag=='0')
+                {
+                        $('#mode').val('checkdata');
+                        $('#form0').submit();
+                }
+        }
+
+        </script>
+
+        <style type="text/css">
+            .error
+            {
+
+            }
+            .span_er
+            {
+                    font:normal 11px Verdana, Arial, Helvetica, sans-serif;
+                    color:red;
+
+            }
+            #validEmail
+            {
+                    margin-top: 4px;
+                    margin-left: 9px;
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+            }
+            .text
+            {
+                    font-family: Arial, Tahoma, Helvetica;
+            }
+            .text1
+            {
+                font:normal 12px Verdana, Arial, Helvetica, sans-serif;
+                color: maroon;
+            }
+	</style>
+    </head>
+    <body>
+        <center><br><font style="align-content: center;font-weight: bold;font-size: large;">PDF advertisement will appear soon</font></center>
+    </body>
+</html>

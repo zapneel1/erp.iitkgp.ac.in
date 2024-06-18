@@ -1,0 +1,505 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="StyleSheet" href="../css/style.css">
+        <title>Curricula Subjects</title>
+        <script type="text/javascript">
+
+            function callFile(pageno, fileFullPath, doc) {
+
+                //document.forms['letter-form'].action='http://10.57.4.65:8080/StudentPerformanece/commonFileDownloader.jsp';
+                //document.forms['perform-form'].action='https://erp.iitkgp.ernet.in/StudentPerformance/commonFileDownloader.jsp';
+                document.forms['perform-form'].action = 'commonFileDownloader.jsp';
+                document.forms['perform-form'].elements['fileFullPath'].value = fileFullPath;
+                document.forms['perform-form'].elements['pageno'].value = pageno;
+                document.forms['perform-form'].elements['docId'].value = doc;
+
+                document.forms['perform-form'].submit();
+
+            }
+        </script>
+    </head>
+    <body>
+        
+        
+        <center><font style="color: midnightblue;size:6" ><b><u>Course Name- BUSINESS ANALYTICS  -   (PG)</u></b></font></center>
+        <table width="100%" cellpadding="1" cellspacing="1" border="0" bgcolor="#e0ecff">
+            
+            <tr>
+                <td colspan="6" style="background-color: skyblue"><b>Semester : 1</b></td>
+                <!--                        <td colspan="4" style="background-color: skyblue" align="right">
+                                            <font style="background-color: goldenrod">Minimum Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            Cumulative Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            </font>
+                                        </td>-->
+            </tr>
+            <tr>
+                <td width="50px" nowrap></td>
+                <td width="50px" nowrap><b>Subject Type</b></td>
+                <td width="50px" nowrap><b>Subject No</b></td>
+                <td width="50px" nowrap><b>Subject Name</b></td>
+                <td width="50px" nowrap><b>L-T-P</b></td>
+                <td width="50px" nowrap><b>Credit</b></td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM01//BAIIM01_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>CONTEMPORARY BUSINESS ANALYTICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM03//BAIIM03_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>MARKETING MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM04//BAIIM04_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>ORGANIZATIONAL BEHAVIOR</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM11//BAIIM11_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>MANAGERIAL COMMUNICATION</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM27//BAIIM27_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>FINANCIAL REPORTING AND ANALYSIS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+
+                <td style="background-color: white" nowrap>STOCHASTIC PROCESSES AND APPLICATIONS</td>
+                <td style="background-color: white" nowrap>50</td>
+                <td style="background-color: white" nowrap>5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+
+                <td style="background-color: white" nowrap>STATISTICAL STRUCTURES IN DATA</td>
+                <td style="background-color: white" nowrap>50</td>
+                <td style="background-color: white" nowrap>5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+
+                <td style="background-color: white" nowrap>INFERENCE</td>
+                <td style="background-color: white" nowrap>50</td>
+                <td style="background-color: white" nowrap>5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+
+                <td style="background-color: white" nowrap>COMPUTING FOR DATA SCIENCES</td>
+                <td style="background-color: white" nowrap>50</td>
+                <td style="background-color: white" nowrap>5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+
+                <td style="background-color: white" nowrap>FUNDAMENTALS OF DATA BASE SYSTEMS</td>
+                <td style="background-color: white" nowrap>50</td>
+                <td style="background-color: white" nowrap>5</td>
+            </tr>
+            
+            <tr>
+                <td colspan="6" style="background-color: skyblue"><b>Semester : 2</b></td>
+                <!--                        <td colspan="4" style="background-color: skyblue" align="right">
+                                            <font style="background-color: goldenrod">Minimum Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            Cumulative Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            </font>
+                                        </td>-->
+            </tr>
+            <tr>
+                <td width="50px" nowrap></td>
+                <td width="50px" nowrap><b>Subject Type</b></td>
+                <td width="50px" nowrap><b>Subject No</b></td>
+                <td width="50px" nowrap><b>Subject Name</b></td>
+                <td width="50px" nowrap><b>L-T-P</b></td>
+                <td width="50px" nowrap><b>Credit</b></td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BM60116//BM60116_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>MODELLING IN OPERATIONS MANAGEMENT</td>
+                <td style="background-color: white" nowrap>48</td>
+                <td style="background-color: white" nowrap>4.8</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BM69006//BM69006_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>DATA SCIENCE LABORATORY</td>
+                <td style="background-color: white" nowrap>36</td>
+                <td style="background-color: white" nowrap>2.4</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/CS60020//CS60020_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>FOUNDATIONS OF ALGORITHM DESIGN AND MACHINE LEARNING</td>
+                <td style="background-color: white" nowrap>48</td>
+                <td style="background-color: white" nowrap>4.8</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/MA60056//MA60056_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>REGRESSION AND TIME SERIES MODELS</td>
+                <td style="background-color: white" nowrap>48</td>
+                <td style="background-color: white" nowrap>4.8</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    
+                    <a href="CurriculaElectiveList.jsp@stuType=PG&amp;splCode=BM2&amp;semno=2&amp;curr_type=OLD&amp;sub_type=3&#32;ELECTIVES(I,II,III)">3 ELECTIVES(I,II,III)</a>
+                    
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/', 'ACAD/SUBJECT/SYLLABUS/2009/BM60071/1');"><b></b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap></td>
+            </tr>
+            
+            <tr>
+                <td colspan="6" style="background-color: skyblue"><b>Semester : 3</b></td>
+                <!--                        <td colspan="4" style="background-color: skyblue" align="right">
+                                            <font style="background-color: goldenrod">Minimum Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            Cumulative Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            </font>
+                                        </td>-->
+            </tr>
+            <tr>
+                <td width="50px" nowrap></td>
+                <td width="50px" nowrap><b>Subject Type</b></td>
+                <td width="50px" nowrap><b>Subject No</b></td>
+                <td width="50px" nowrap><b>Subject Name</b></td>
+                <td width="50px" nowrap><b>L-T-P</b></td>
+                <td width="50px" nowrap><b>Credit</b></td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM05//BAIIM05_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>CATEGORICAL DATA ANALYSIS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM06//BAIIM06_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>BUSINESS DATA MINING</td>
+                <td style="background-color: white" nowrap>30</td>
+                <td style="background-color: white" nowrap>3.0</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM07//BAIIM07_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>BUSINESS ECONOMICS</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM08//BAIIM08_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>PROJECT MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM09//BAIIM09_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>STRATEGIC MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM10//BAIIM10_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>HUMAN RESOURCE MANAGEMENT</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/DATA/ARCHIVE/SUBJECT/SYLLABUS/2009/BAIIM33//BAIIM33_1.pdf', '');"><b>XXXX</b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap>CORPORATE FINANCE</td>
+                <td style="background-color: white" nowrap>15</td>
+                <td style="background-color: white" nowrap>1.5</td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    
+                    <a href="CurriculaElectiveList.jsp@stuType=PG&amp;splCode=BM2&amp;semno=3&amp;curr_type=OLD&amp;sub_type=4&#32;ELECTIVES(IV,V,VI,VII)">4 ELECTIVES(IV,V,VI,VII)</a>
+                    
+                </td>
+                
+                
+                <td style="background-color: white" nowrap><a onclick="callFile('0', '/', 'ACAD/SUBJECT/SYLLABUS/2009/BM60071/1');"><b></b></a></td>
+
+                
+
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap></td>
+            </tr>
+            
+            <tr>
+                <td colspan="6" style="background-color: skyblue"><b>Semester : 4</b></td>
+                <!--                        <td colspan="4" style="background-color: skyblue" align="right">
+                                            <font style="background-color: goldenrod">Minimum Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            Cumulative Semester Credit Required : <b>Will be Uploaded Shortly</b>
+                                            </font>
+                                        </td>-->
+            </tr>
+            <tr>
+                <td width="50px" nowrap></td>
+                <td width="50px" nowrap><b>Subject Type</b></td>
+                <td width="50px" nowrap><b>Subject No</b></td>
+                <td width="50px" nowrap><b>Subject Name</b></td>
+                <td width="50px" nowrap><b>L-T-P</b></td>
+                <td width="50px" nowrap><b>Credit</b></td>
+            </tr>
+            
+            <tr>
+                <td style="background-color: white" nowrap></td>
+                <td style="background-color: white" nowrap>
+                    CORE
+                </td>
+                    
+                <td style="background-color: white" nowrap> XXXX </td>    
+                
+
+                <td style="background-color: white" nowrap>INTERNSHIP BASED PROJECT</td>
+                <td style="background-color: white" nowrap>0</td>
+                <td style="background-color: white" nowrap>18</td>
+            </tr>
+            
+        </table>
+        
+
+        <form name="perform-form" target="_blank" id="perform-form" action="CurriculaSubjectsList.jsp@stuType=PG&amp;splCode=BM2" method="POST">
+            <input type="hidden" name="rollno" value="" />
+            <input type="hidden" name="fileFullPath" value="" />
+            <input type="hidden" name="pageno" value="" />
+            <input type="hidden" name="docId" value="" />
+        </form>
+    </body>
+</html>

@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap/css/datepickerV2.0.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-select.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-table.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-dialog.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+
+        <script src="bootstrap/js/jquery-1.11.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="bootstrap/js/bootstrap-select.js"></script>
+        <script src="bootstrap/js/bootstrap-datepickerV2.0.js"></script>
+        <script src="bootstrap/js/bootstrap-table.js"></script>
+        <script src="bootstrap/js/bootstrap-dialog.js"></script>
+        <script src="bootstrap/export/bootstrap-table-export.js"></script>
+        <script src="bootstrap/export/html2canvas.js"></script>
+        <script src="bootstrap/export/jquery.base64.js"></script>
+        <script src="bootstrap/export/tableExport.js"></script>
+        <script src="bootstrap/js/bootstrap-filestyle.js"></script>
+        <script src="bootstrap/js/custom-methods.js"></script>
+        <script src="bootstrap/js/somesh-bootstrap-select-loader.js"></script>
+        <script>
+            function get_otp() {
+                var mail_id_val = $("#app_mail_id").val();
+                var usercode = $('#app_userCode').val();
+                $('#userCodeAlert').hide();
+                $('#userMailAlert').hide();
+                var isValid = true;
+                if (mail_id_val === "") {
+                    $('#userMailAlert').show();
+                    isValid = false;
+//                    myalert("Information", "Please Type Email-Id Which No is 01.");
+                }
+                if (usercode === "") {
+                    $('#userCodeAlert').show();
+                    isValid = false;
+                }
+                if (isValid) {
+                    var data = "app_mail_id=" + mail_id_val + "&app_userCode=" + usercode;
+                    $.ajax({
+                        url: "getOtp.htm",
+                        type: "POST",
+                        cache: false,
+                        data: data,
+                        dataType: "json",
+                        success: function (json)
+                        {
+//                            alert('next step ----------');
+//                            getCreatedByList();
+                            myalert("Information", json.msg);
+                            $("#verification_msg").html(json.msg);
+                        }
+                    });
+                }
+            }
+
+            function getApplicationFom() {
+                $('#userOtpAlert').hide();
+                $('#userCodeAlert').hide();
+                $('#userMailAlert').hide();
+                var mail_id_val = $("#app_mail_id").val();
+                var otp = $('#verification_code').val();
+                var usercode = $('#app_userCode').val();
+                $('#mailId').val(mail_id_val);
+                var isValid = true;
+                if (mail_id_val === "") {
+                    $('#userMailAlert').show();
+                    isValid = false;
+//                    myalert("Information", "Please Type Email-Id Which No is 01.");
+                }
+                if (otp === "") {
+                    $('#userOtpAlert').show();
+                    isValid = false;
+                }
+
+                if (usercode === "") {
+                    $('#userCodeAlert').show();
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    var data = "app_mail_id=" + mail_id_val + "&otp=" + otp + "&app_userCode=" + usercode;
+                    $.ajax({
+                        url: "getApplicationForm.htm",
+                        type: "POST",
+                        cache: false,
+                        data: data,
+                        dataType: "json",
+                        success: function (json)
+                        {
+
+                            $('#userId').val(json.createdBy);
+                            if (json.status === "Y") {
+//                                $('#getApplicationForm').prop("action", "generalTaDaProcessingV3.htm");
+                                $('#getApplicationForm').submit();
+//                                window.location = "generalTaDaProcessingV3.htm?userId=" + json.createdBy + "&mailId=" + json.mailId;
+                            } else {
+                                myalert("Information", json.msg);
+                            }
+//                            myalert("Information", json.msg);
+//                            $("#verification_msg").html(json.msg);
+                        }
+                    });
+                }
+            }
+
+            function  getCreatedByList() {
+                var mailId = $('#app_mail_id').val();
+                generateSelectforBind("createdByList", "getCreatedByList.htm?app_mail_id=" + mailId, "");
+            }
+
+            function generateSelectforBind(id, url, fieldValue) {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    async: false,
+                    success: function (json) {
+                        var len = json.length;
+                        if (len > 0)
+                        {
+                            // $("ApprovalNoList").empty();
+                            //$("ApprovalNoList").append($('<option></option>').val("").html("-SELECT-"));
+                            var list = "<option value=''>Select</option>";
+                            for (var i = 0; i < json.length; i++) {
+                                var columns = json[i];
+                                var value1 = "";
+                                var value2 = "";
+
+                                for (var key in columns) {
+                                    value1 = key;
+                                    value2 = json[i][key];
+                                    list = list + "<option value='" + value1 + "'>" + value2 + "</option>";
+                                }
+                                // $("ApprovalNoList").append($('<option></option>').val(value1).html(value2));
+                            }
+                            $('#' + id).html(list);
+                            $('#' + id).selectpicker('refresh');
+                            $(id).selectpicker('refresh');
+                        }
+                    }
+                });
+            }
+
+        </script>
+    </head>
+    <body onload="">
+        <div class="container-fluid">
+            <div class="well well-sm">
+                <h4 style="font-weight:bold; text-align:center;" class="alert alert-info">Temporary User Authentication</h4> 
+                <div class=" well well-sm text-info">
+                    <form id="getApplicationForm" action="https://erp.iitkgp.ac.in/SricWeb/generalTaDaProcessingV3.htm" method="POST">
+                        <input type="hidden" id="userId" name="userId" value="">
+                        <input type="hidden" id="mailId" name="mailId" value="">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="text-muted pull-right" style="color:blue;"><span style="color:red;"> * </span>Indicates Required Field</span>
+                            </div>
+                        </div>                                       
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div id="userMailAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please enter valid email ID:</span> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="app_mail_id"><span style="color:red;">*</span>01.Email-Id:</label>
+                                    <input type="text" class="form-control " name="app_mail_id" id="app_mail_id" placeholder="Applicant Emaill-Id"  />
+                                </div>
+                            </div>     
+
+                            <div class="col-sm-3">
+                                <div id="userCodeAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please enter User code</span> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="app_userCode"><span style="color:red;">*</span>02.User Code:</label>
+                                    <input type="text" class="form-control " name="app_userCode" id="app_userCode" placeholder="Applicant UserCode"  />
+                                </div>
+                            </div> 
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <br>
+                                    <input class="btn btn-info" type="button" value="Get Verification Code" id="get_code" name="get_code" title="Get Verification Code By Email-Id" onclick="get_otp()">
+                                </div>                                           
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div id="userOtpAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please enter verification OTP which is sent to your mail address.</span> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="verification_code"><span style="color:red;">*</span>03.Email-Verification Code:</label>
+                                    <input type="password" class="form-control date" name="verification_code" id="verification_code" placeholder="Email-Verification Code"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <br>
+                                    <input class="btn btn-success" type="button" value="Get Application forms" id="recruitment_status_search" title="" name="recruitment_status_search" onclick="getApplicationFom()">
+                                </div>                                           
+                            </div>
+                        </div>&nbsp;&nbsp;<span id="verification_msg" style="color:red;background-color:yellow;"></span>                                         
+                    </form>
+                </div>
+
+            </div>
+    </body>
+</html>

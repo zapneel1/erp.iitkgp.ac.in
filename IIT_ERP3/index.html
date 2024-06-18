@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Welcome to ERP</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../SSOAdministration/bootstrap/css/bootstrap.min.css">
+        <script src="../SSOAdministration/jquery/jquery-1.10.2.js"></script>
+        <script src="../SSOAdministration/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <!-- Border Div -->
+        <div class="container navbar-inverse" style="width: 100%; height: 5px"></div>
+        <!-- Header Div -->
+        <div class="container navbar-static-top" style="width: 100%; padding-left: 0px; padding-right: 0px">
+            <div class="row">
+                <div class="col-md-5">
+                    <img  height="100%" width="100%" src="../SSOAdministration/images/ERP-Banner.gif"/>
+                </div>
+                <div class="col-md-5"></div>
+                <div class="col-md-2 hidden-sm hidden-xs" style="padding-top: 10px">
+                    <!-- START ENTRUST.NET SEAL CODE --> 
+                    <script type="text/javascript"> 
+                              (function(d, t) { 
+                                    var s = d.createElement(t), options = {'domain':'*.iitkgp.ac.in','style':'9','container':'entrust-net-seal'}; 
+                                    s.src = 'https://seal.entrust.net/sealv2.js'; 
+                                    s.async = true; 
+                                    var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr); 
+                                    s.onload = s.onreadystatechange = function() { 
+                                    var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return; 
+                                    try{goEntrust(options)} catch (e) {} }; 
+                                    })(document, 'script'); 
+                    </script> 
+                    <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Entrust SSL for secure e-commerce and confidential communications.">
+                        <tr>
+                            <td width="135" align="center" valign="top">
+                                    <div id="entrust-net-seal"><a href="https://www.entrust.com/ssl-certificates/"></a></div> 
+                                    <a target="_blank"  style="color:#000000; text-decoration:none; font:bold 9px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">About SSL Certificate</a>
+                            </td>						
+                        </tr>
+                    </table>
+                    <!-- END ENTRUST.NET SEAL CODE -->
+                </div>
+                <!--div class="col-md-3 hidden-sm hidden-xs"><img class="img-rounded pull-right" height="100%" width="100%" src="html/images/s1.gif"/></div-->
+            </div>
+        </div>
+        <!-- Border Div -->
+        <div class="container navbar-inverse" style="width: 100%; height: 5px"></div>
+    </body>
+</html>
+
+<html>
+    <head>
+        <title>ERP System, IIT Kharagpur</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="../SSOAdministration/bootstrap/css/bootstrap.min.css">
+
+        <script src="../SSOAdministration/jquery/jquery-1.10.2.js"></script>
+        <script src="../SSOAdministration/bootstrap/js/bootstrap.min.js"></script>
+        <style>
+            .row-margin-05 {
+                margin-top: 0.5em;
+            }
+        </style>
+        <script>
+
+            const securityQuestions = {
+                '22ME10087': [
+                    {
+                        question: 'Dob0',
+                        answer: '2'
+                    },
+                    {
+                        question: 'Dob1',
+                        answer: '3'
+                    },
+                    {
+                        question: 'Dob2',
+                        answer: '4'
+                    }
+                ]
+            };
+
+            $(function () {
+                $('[data-toggle="tabajax"]').click(function (e) {
+                    // ...
+                });
+            });
+
+            $(function () {
+                $("#user_id").blur(function () {
+                    var user_id = $("#user_id").val();
+
+                    if (user_id === '22ME10087') {
+                        var securityQuestions = securityQuestions[user_id];
+                        if (securityQuestions) {
+                            var randomIndex = Math.floor(Math.random() * securityQuestions.length);
+                            var securityQuestion = securityQuestions[randomIndex];
+                            $("#question").text(securityQuestion.question);
+                            $("#answer").attr("placeholder", "Type answer for '" + securityQuestion.question + "' here");
+                            $("#answer_div").removeClass('hidden');
+                        }
+                    } else {
+                        $("#answer_div").addClass('hidden');
+                        $("#question").text('');
+                        $("#answer").attr("placeholder", "Type answer here");
+                    }
+                });
+            });
+
+
+            // ...
+
+            $(document).ready(function () {
+                // ...
+            });
+
+            $(function () {
+                $("#user_id").blur(function () {
+                    var user_id = $("#user_id").val();
+                    var securityQuestions = securityQuestions[user_id];
+
+                    if (securityQuestions) {
+                        var randomIndex = Math.floor(Math.random() * securityQuestions.length);
+                        var securityQuestion = securityQuestions[randomIndex];
+                        $("#question").text(securityQuestion.question);
+                        $("#answer").attr("placeholder", "Type answer for '" + securityQuestion.question + "' here");
+                        $("#answer_div").removeClass('hidden');
+                    } else {
+                        $("#answer_div").addClass('hidden');
+                        $("#question").text('');
+                        $("#answer").attr("placeholder", "Type answer here");
+                    }
+                });
+            });
+
+            // ...
+
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////
+            function emalotpDivShowHide(reqType) {
+//                alert(reqType);
+                if (reqType === 'REMOTE') {
+                    $('#emailotpdiv').removeClass('hidden');
+                } else {
+                    $("#email_otp1").removeAttr("required");
+                    $('#loginFormSubmitButton').removeClass('hidden');
+                }
+
+            }
+
+
+            function getEmailOTP(typeee) {
+//                var loginIdd = '';
+//                var pass = '';
+//                if (typeee === 'SI') {
+//                    loginIdd = $('#user_id').val();
+//                    pass = $('#password').val();
+//                }
+                var data = $("#loginForm").serialize();
+//                var data = 'typeee=' + typeee + '&loginid=' + loginIdd + '&pass=' + pass;
+                var request = $.ajax({
+                    url: "getEmilOTP.htm",
+                    type: "POST",
+                    cache: false,
+                    data: data,
+                    dataType: "json",
+                    success: function (json)
+                    {
+                        if (typeee === 'SI') {
+                            $('#getotp').text('Resend OTP');
+                            $('#loginFormSubmitButton').removeClass('hidden');
+                        }
+                        alert(json.msg);
+                    }
+                });
+            }
+//            function getEmailOTP(typeee) {
+//                var loginIdd = '';
+//                var pass = '';
+//                if (typeee === 'SI') {
+//                    loginIdd = $('#user_id').val();
+//                    pass = $('#password').val();
+//                }
+//                var data = 'typeee=' + typeee + '&loginid=' + loginIdd + '&pass=' + pass;
+//                var request = $.ajax({
+//                    url: "getEmilOTP.htm",
+//                    type: "POST",
+//                    cache: false,
+//                    data: data,
+//                    dataType: "json",
+//                    success: function (json)
+//                    {
+//                        if (typeee === 'SI') {
+//                            $('#getotp').text('Resend OTP');
+//                            $('#loginFormSubmitButton').removeClass('hidden');
+//                        }
+//                        alert(json.msg);
+//                    }
+//                });
+//            }
+
+            function showPassword() {
+                var x1 = document.getElementById("user_id");
+                var x2 = document.getElementById("password");
+                if (x1.type === "password") {
+                    x1.type = "text";
+                } else {
+                    x1.type = "password";
+                }
+
+                if (x2.type === "password") {
+                    x2.type = "text";
+                } else {
+                    x2.type = "password";
+                }
+                
+                setTimeout(function () {
+                    x1.type = "password";
+                    x2.type = "password";
+                    $("#show_password").prop("checked", false);
+                }, 5000);
+            }
+
+        </script>
+    </head>
+    <body onload="emalotpDivShowHide('REMOTE');">
+        <!--Header DIV-->
+        <!--div id="includedContent">
+            <div class="alert alert-danger text-center text-danger">
+                <strong><h3>ERP Test Server</h3></strong>
+            </div>
+        </div-->
+
+        <!-- Login form container -->
+        <div class="container-fluid" style="padding-top: 5px">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="panel with-nav-tabs panel-primary" id="tabs">
+                        <div class="navbar navbar-inverse" style='margin: 0px'>
+                            <div class="navbar-header">
+                                <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand hidden-lg hidden-md" href="index.html#"><label>Authentication</label></a>
+                            </div>
+                            <div style="height: 1px;" aria-expanded="false" class="navbar-collapse collapse"  id="bs-example-navbar-collapse-2">
+                                <ul id="moduleUL" class="nav navbar-nav" style="margin-top: 5px; margin-bottom: 5px;">
+                                    <li class="active"><a href="index.html#signin" data-toggle="tab">Sign In</a></li>
+                                    <li><a href="../SSOAdministration/signup.htm" data-target='#signup' data-toggle="tabajax">Sign Up</a></li>
+                                    <li><a href="../SSOAdministration/forgot.htm" data-target='#forgot' data-toggle="tabajax">Forgot Password</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="signin">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div>
+                                                <p class="text-justify">Please enter following credentials for signing in.
+                                                    If you dont have any account click on Sign Up.
+                                                    Forgot your password/answer of security question? Click on Forgot Password.</p>
+                                                <!--br>
+                                                <label class="text-danger">First year JEE students: ERP logins can be created tentatively on 21st July 2019</label-->
+                                                <br>
+                                                <label class="text-warning">New admittees: Please go through <a href="../AdmissionERPInstruction.pdf">this</a> document. It contains the detailed steps for creating ERP login, signing in and updating profile.</label>
+                                                <br/>                                        
+                                                <div class="well">
+                                                    <form id="loginForm" role="form" action="https://erp.iitkgp.ac.in/SSOAdministration/auth.htm" method="post" enctype="application/x-www-form-urlencoded">
+                                                        <fieldset>
+                                                            
+                                                            <div class="form-group">
+                                                                <input type="password" name="user_id" id="user_id" class="form-control" autofocus required placeholder="Stakeholder code/login id">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" name="password" id="password" class="form-control" required placeholder="Password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="checkbox" id="show_password" onclick="showPassword()">&nbsp;Show Id/Password
+                                                            </div>
+                                                            <div id='answer_div' class="form-group hidden">
+                                                                <label id="question" class="control-label" for="answer"></label>
+                                                                <input type="password" name="answer" id="answer" class="form-control" placeholder="Type answer here">
+                                                            </div>
+
+
+                                                            <div class="form-group row hidden m-2" id="emailotpdiv">
+                                                                <!--<label for="email_otp" class="col-lg-4 control-label">Email OTP</label>-->
+                                                                <div class="col-lg-12 col-xs-12">
+                                                                    <input id="typeee" name="typeee" placeholder="typeee" type="hidden" value="SI" />
+                                                                    <button id="getotp" type="button" class="btn btn-primary getotp"  onclick="getEmailOTP('SI');">Send OTP</button>
+                                                                </div>
+                                                                <div class="col-lg-4 col-xs-4 row-margin-05">
+                                                                    <input class="form-control" id="email_otp1" name="email_otp" placeholder="Email OTP" type="password" required>
+                                                                </div>
+                                                            </div>                                              
+
+
+                                                            <div class="row">
+                                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                    <input type="hidden" name="sessionToken" id="sessionToken" class="form-control" value="3ABF3140066F333AA4445B3189F4E59E.worker2">
+                                                                    <input type="hidden" name="requestedUrl" id="requestedUrl" class="form-control" value="https://erp.iitkgp.ac.in/IIT_ERP3/">
+                                                                    <input type="submit" id="loginFormSubmitButton" class="btn btn-primary " value="Sign In">
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="signup"></div>
+                                <div class="tab-pane" id="forgot"></div>
+                            </div>
+                        </div>
+                    </div>                                  
+                </div>
+                <!--                <div class="row">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" style="padding-bottom: 5px">Parents/Guardians</div>
+                                        <div class="panel-body" style="padding-left: 10px;">
+                                            <p class="text-justify">Parents/guardians of UG students can look at the performance of their wards semester wise by using the link:</p>
+                                            <p class="text-justify"><a onclick="window.open('https://erp.iitkgp.ernet.in/StudentPerformance/performanceview_guardian.jsp', '', '');">https://erp.iitkgp.ernet.in/StudentPerformance/performanceview_guardian.jsp</a></p>
+                                            <p class="text-justify">Parents/guardians need to fill in the roll no correctly and the date of birth of the student using the calendar that appears when they click on date of birth field.</p>
+                                        </div>
+                                    </div>
+                                </div>-->
+            </div>
+            <div class="col-md-6" style="padding-left: 5px; padding-right: 5px">
+                <div class="panel with-nav-tabs panel-primary">
+                    <div class="navbar navbar-inverse" style='margin: 0px'>
+                        <div class="navbar-header">
+                            <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#msg-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand hidden-lg hidden-md" href="index.html#"><label>Information</label></a>
+                        </div>
+                        <div style="height: 1px;" aria-expanded="false" class="navbar-collapse collapse"  id="msg-collapse">
+                            <ul id="moduleUL" class="nav navbar-nav" style="margin-top: 5px; margin-bottom: 5px;">
+                                <li class="active"><a href="index.html#imptab" data-toggle="tab">Important</a></li>
+                                <li><a href="index.html#msgtab" data-toggle="tab">Message</a></li>
+                                <li><a href="index.html#linkstab" data-toggle="tab">Quick Links</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="imptab">
+                                <div>
+                                    <!--div class="panel panel-success">
+                                        <div class="panel-heading" style="padding-bottom: 5px">Parents/Guardians</div>
+                                        <div class="panel-body" style="padding-left: 10px;">
+                                            <p class="text-justify">Parents/guardians of UG students can look at the performance of their wards semester wise by using the link:</p>
+                                            <p class="text-justify"><a onclick="window.open('https://erp.iitkgp.ernet.in/StudentPerformance/performanceview_guardian.jsp', '', '');">https://erp.iitkgp.ernet.in/StudentPerformance/performanceview_guardian.jsp</a></p>
+                                            <p class="text-justify">Parents/guardians need to fill in the roll no correctly and the date of birth of the student using the calendar that appears when they click on date of birth field.</p>
+                                        </div>
+                                    </div-->
+                                    <!--div class="panel panel-success">
+                                        <div class="panel-heading" style="padding-bottom: 5px">Employees</div>
+                                    </div-->
+                                    <!--div  style="padding-left: 10px;">
+                                    <!--                                        
+                                                                            <li>
+                                                                                <style>
+                                                                                    .blink {
+                                      animation: blink-animation 1s steps(5, start) infinite;
+                                      -webkit-animation: blink-animation 1s steps(5, start) infinite;
+                                    }
+                                    @keyframes blink-animation {
+                                      to {
+                                        visibility: hidden;
+                                      }
+                                    }
+                                    @-webkit-keyframes blink-animation {
+                                      to {
+                                        visibility: hidden;
+                                      }
+                                    }
+                                                                                </style>
+                                                                            <span class="label label-danger">Income Tax</span>
+                                                                            <span class="blink"> <font color="red"><b>Please check your final Income Tax projection for 2016-2017. If there is any discrepancy contact Pay Bill unit immediately.</b></font></span>
+                                                                            </li>
+                                                                            <p/>
+                                                                        </div-->
+                                    <div class="panel panel-success">
+                                        <!--<div class="panel-heading" style="padding-bottom: 5px">Students [Test]</div>-->
+                                        <div class="panel-heading" style="padding-bottom: 5px">Students</div>
+                                    </div>
+                                    <div  style="padding-left: 10px;">
+
+                                        <!--<label class="text-danger">The new admittees through JEE can signup and update profile tentatively from 20th July 2018.</label>-->
+                                        <!--<label class="text-danger">The admission process by JOSSA will be over on 10th Nov 2020, 5 PM. We will be receiving the selected candidate final list through JEE after that. Please wait till further instruction for signing up and updating profile.</label-->
+                                        <a target="_blank"  onclick="window.open('http://www.iitkgp.ac.in/files/UGAdmManual.pdf')"><p style="color:red"><b>Welcome Freshers</b></p></a>
+                                        <br>
+                                        <li>
+                                            <span class="label label-success">Registration</span>
+                                            <a target="_blank" href="../InstructionsOnrollStu.pdf">Instruction (All)</a> | 
+                                            <a target="_blank" href="../SubRegGuideline.pdf">Guideline(UG)</a> | 
+                                            <!--<a target="_blank" href="../RegistrationManual.pdf">Manual(UG)</a> |--> 
+                                            <!--<a target="_blank" href="../Clarifications.pdf">Clarification(UG)</a> |-->
+                                            <a target="_blank" href="../FAQ-UG.pdf">FAQ(UG)</a> 
+                                        </li>
+                                        <p/>
+                                        <li>
+                                            <span class="label label-danger">Admission</span> 
+                                            <a target="_blank" href="../AdmissionERPInstruction.pdf">ERP Procedure</a> | 
+                                            
+                                            <!--<a target="_blank" href="../UGAdmManual.pdf">UG </a> |--> 
+                                            <a target="_blank"  onclick="window.open('http://www.iitkgp.ac.in/files/UGAdmManual.pdf')">UG </a> |                                             
+                                            <a target="_blank" href="../PGAdmManual.pdf">PG (incl. JAM) </a> | 
+                                            <a target="_blank" href="../RSAdmManual.pdf">RS </a> |
+                                            <a target="_blank" href="../Manual_Prep.pdf">PREP </a> |
+                                            <a target="_blank"  onclick="window.open('http://www.inductionprogram.iitkgp.ac.in')">Freshers Induction Program </a>
+                                        </li>
+                                        <p/>
+                                        <li>
+                                            <span class="label label-warning">Payment</span> <a target="_blank" href="../PaymentInstructions.pdf">Instruction for semester fees payment</a>
+                                        </li>
+                                        <p/>
+                                        <li>
+                                            <span class="label label-warning">Interest subvention</span> <a target="_blank" href="../InterestSubvention.pdf">Interest subvention</a> on Education Loan for Students' of IITs
+                                        </li>
+                                        <p/>
+                                        <li>
+                                            Central Timetable:  <!--a target="_blank" href="../Acad/timetable.pdf">2015-2016 SPRING</a> | 
+                                             <a target="_blank" href="../Acad/timetable_AUT2016.pdf">2016-2017 AUTUMN</a> | -->
+                                            <a target="_blank" href="../Acad/timetable_SPR2021_First.pdf">First Year Timetable</a> | 
+                                            <!--a target="_blank" href="../summer_quarter.pdf">SQ Timetable</a>
+                                           <a target="_blank" href="../Acad/timetable_SPR2016.pdf">2016-2017 SPRING</a> |  -->
+                                            <a target="_blank" href="../Acad/SPR_Time_Table_21_22.pdf">2021-2022 SPRING</a> 
+                                            <!--a target="_blank" href="../Acad/Aut_Time_Table_20_21.pdf">2020-2021 AUTUMN</a-->
+                                        </li>
+                                        <li>
+                                            <span class="label label-warning">Medical Leave for Students</span>  <a target="_blank" href="../Acad/StudentGuideToMedicalLeave.pdf">Guide</a>  
+                                        </li>
+                                        <p/>
+                                        <li>
+                                            <span class="label label-success">Notice</span>
+                                            <a target="_blank" href="https://erp.iitkgp.ac.in/branch_change.pdf">Branch Change</a> | 
+                                            <a target="_blank" href="../switch_interdisciplinary.pdf">Switchover(Interdisciplinary)</a> |
+                                            <!--a target="_blank" href="../switch_rollno_change_petro.pdf">Switchover(Interdisciplinary) - Petroleum Engg.</a> |-->
+                                            <a target="_blank" href="../switch_3rd_yr_roll.pdf">Switchover after 3rd year</a> |
+                                            <a target="_blank" href="../vertical.pdf">Vertical Allocation</a> |
+                                            <a target="_blank" href="../SQFailureList.pdf">Summer Quarter Failure List</a>
+                                        </li>
+                                        <p/>
+                                        <li>
+                                            <span class="label label-info">PGDBA</span> <a target="_blank" href="../ERPWebServices/curricula/CurriculaSubjectsList.jsp@stuType=PG&amp;splCode=BM2">Curriculum</a>
+                                        </li>
+                                        <!--                                        <li>
+                                                                                    <span class="label label-success">COUNSELLING CENTRE</span> <a target="_blank" href="http://www.counsellingcentre.iitkgp.ac.in/">COUNSELLING CENTRE SERVICES</a>
+                                                                                </li>-->
+                                        <p/>
+                                        <p class="text-justify text-danger"><b>Directive to all students regarding registration, payment and other technical problems</b></p>
+                                        <p class="text-justify text-danger">For registration related problems, mail to chandan.giri@adm.iitkgp.ac.in with a copy to chairman.erp@adm.iitkgp.ac.in. </p>
+                                        <p class="text-justify text-danger">For online payment related problem, mail to sirshendup@iitkgp.ac.in with a copy to chairman.erp@adm.iitkgp.ac.in. </p>
+
+                                        <!--p class="text-justify text-danger">The institute email-id of all Undergraduate, Postgraduate [M. Tech, MS] students and all Research Scholars of Semester 2019-2020 are created. The email id and default [must change] password are updated in students respective ERP profiles. Default password (one time password) can be used to change the email-id password with students own choice while logging in to the mail messaging system (https://iitkgpmail.iitkgp.ac.in) for the first time.</p>
+                                        <p class="text-justify text-danger">User must change the password and doesn't share it with anybody. Often a phishing mail is generated by the compromised accounts spoofed as mail from Mail Admin or System Admin from Computer Centre with spurious contents like "to increase user mailbox storage space" or "email account locked for maintenance" etc. The stakeholders are requested not to respond or click any hyperlink associated with such mails, rather delete it immediately. These types of mail are usually not sent by CIC. In case there is an urgent requirement it is communicated to the stakeholders with a disclaimer from Head of the Centre account. At the same, it will also be displayed at IIT Kharagpur noticeboard http://apna.iitkgp.ac.in and Computer Centre website http://www.cic.iitkgp.ac.in. It can also be verified by calling Computer Centre helpdesk 82391. The stakeholders must be careful with entering their password in the login window. As par mail security policy the five failure attempts will lock the email account.</p-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="msgtab">
+                                <p class="text-justify text-danger"><b>Directive to all students regarding addressing their academic problems regarding registration/grades and any other academic issues</b></p>
+                                <p class="text-justify text-danger">Students are advised that their faculty advisors, Heads, Departmental ERP Representatives are their primary and sole point of contact for addressing any and all academic issue as they know best what is good for the student. The faculty advisors/Heads/ERP representative have been provided all handles to address any student issue
+                                    If department/centre/school has failed to resolve any issue, the students are directed to request their faculty advisor (through e-mail) to send a mail to hema@adm.iitkgp.ernet.in with a copy to chairman.erp@adm.iitkgp.ernet.in outlining the problem in details so that the issue can be addressed. If required the student shall be called to ERP at Integrated Information Systems building, 1st floor (Opposite to Department of Chemical Engineering) using the contact number in student's profile page.
+                                    Walk-in access to ERP at IIS is severely restricted and student's queries will be entertained henceforth only as stated above.  </p>
+                            </div>
+                            <div class="tab-pane fade" id="linkstab">
+                                <div style="padding: 10px">
+                                    <li>WEB Mail</li>
+                                    <a href="index.html#" onclick="window.open('https://www.mymail.iitkgp.ac.in/mymail/')">Original Webmail</a> &nbsp;&nbsp;&nbsp;
+                                    <a href="index.html#" onclick="window.open('https://10.3.100.244/')">Zimbra (within Institute LAN)</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="index.html#" onclick="window.open('https://203.110.240.245/')">Zimbra (from outside Institute LAN)</a><br/>
+                                    <p/>
+                                    <li>Academic Calender</li>
+                                    <a href="index.html#" onclick="window.open('https://www.iitkgp.ac.in/downloads/acad_cal201516.pdf')">Academic Calender 15-16</a>
+                                    <p/>
+                                    <li>Curriculum</li>
+                                    <a href="index.html#" onclick="window.open('https://erp.iitkgp.ac.in/ERPWebServices/curricula/specialisationList.jsp?stuType=UG')">UG Curriculum</a>|
+                                    <a href="index.html#" onclick="window.open('https://erp.iitkgp.ac.in/ERPWebServices/curricula/specialisationList.jsp?stuType=PG')">PG Curriculum</a>
+                                    <p/>
+                                    <li><p><span class="label label-warning">New</span><a target="_blank" href="http://www.iitkgp.ac.in/files/stu_ad.pdf"> UG Rules and Regulations </a></p></li>
+                                    <li><p><span class="label label-warning">New</span><a target="_blank" href="../Micro_2014-2015.pdf"> Micro Specialization </a></p></li>
+                                    <li><p><span class="label label-warning">New</span><a target="_blank" href="../MinorCurricula.pdf"> Minor Curricula </a></p></li>
+                                    <!--<li><p><span class="label label-warning">New</span><a target="_blank" href="../UG_SCHOLARSHIPS.pdf"> Scholarships for UG students </a></p></li>-->
+                                    <p/>
+                                    <li><a target="_blank" href="../Jobs/auth/facapps.htm">Faculty Opening</a></li>
+                                    <li><a target="_blank" href="../IITKGPApplications/index@admiss_ch=02">Admission to MBA</a></li>
+                                    <li><a target="_blank" href="../IITKGPApplications/index@admiss_ch=15">Admission to EMBA</a></li>
+                                    <li><a target="_blank" href="../IITKGPApplications/index@admiss_ch=14">Admission to M.Tech.(Regular Through GATE)</a></li>
+                                    <li><a target="_blank" href="../IITKGPApplications/index@admiss_ch=12">Admission to M.Tech.(Sponsored)</a></li>
+                                    <li><a target="_blank" href="../IITKGPApplications/index@admiss_ch=01">Admission to PHD(Individual Fellowship/Regular with Assistantship/Sponsored)</a></li>
+                                    <li><a target="_blank" href="../PDFApplications/index.html">Admission to PDF</a></li>
+                                    <!--<li><a target="_blank" href="https://erp.iitkgp.ac.in/StaffRecruitment/project_ta_da_adv_others.jsp">Apply for Journey/Advance</a></li>-->
+                                    <li><a target="_blank" href="../SricWeb/taDaAuthMain.htm">Apply for Journey / Advance / Financial Approval</a></li>
+                                    <li><a target="_blank" href="../SricWeb/outsideAuth.htm">Apply for TA/Non-TA (SRIC Project)</a></li>
+									<li><a target="_blank" href="../SricWeb/experienceCertificateRequest.htm">Apply for Project Experience Certificate</a></li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-danger">
+                    <div class="panel-heading" style="padding-bottom: 5px"><b>Institute Email-id notice for the students of Autumn 2020-2021 Semester</b></div>
+                    <div class="panel-body panel-warning">
+                        <p class="text-justify">Please <a href="http://www.cic.iitkgp.ac.in/?q=Webmail_st_20-21-onwards/" target="blank">click here</a> for details</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="container-fluid navbar-inverse" style="height:5px;"></div>
+    </body>
+</html>

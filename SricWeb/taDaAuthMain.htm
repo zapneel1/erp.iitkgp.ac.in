@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Journey/Advance/Financial Approval</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap/css/datepickerV2.0.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-select.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-table.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-dialog.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+
+        <script src="bootstrap/js/jquery-1.11.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="bootstrap/js/bootstrap-select.js"></script>
+        <script src="bootstrap/js/bootstrap-datepickerV2.0.js"></script>
+        <script src="bootstrap/js/bootstrap-table.js"></script>
+        <script src="bootstrap/js/bootstrap-dialog.js"></script>
+        <script src="bootstrap/export/bootstrap-table-export.js"></script>
+        <script src="bootstrap/export/html2canvas.js"></script>
+        <script src="bootstrap/export/jquery.base64.js"></script>
+        <script src="bootstrap/export/tableExport.js"></script>
+        <script src="bootstrap/js/bootstrap-filestyle.js"></script>
+        <script src="bootstrap/js/custom-methods.js"></script>
+        <script src="bootstrap/js/somesh-bootstrap-select-loader.js"></script>
+        <script>
+            $(function ()
+            {
+                $('#email_t1').hide();
+
+            });
+            function get_otp() {
+                var appl_type_val = $("#appl_type").val();
+                $('#userMailAlert').hide();
+                var isValid = true;
+
+                if (appl_type_val === "-1") {
+                    $('#userMailAlert').show();
+                    isValid = false;
+                    myalert("Information", "Please select applicant type Which No is 01.");
+                }
+                var data = "";
+                if (isValid) {
+                    if (appl_type_val === "OS") {
+                        var mail_id_val = $("#app_mail_id").val();
+                        if (mail_id_val === "") {
+                            $('#userMailAlert').show();
+                            isValid = false;
+                            myalert("Information", "Please Type Applicant Code/Roll No. Which No is 02.");
+                        }
+                        data = "app_mail_id=" + mail_id_val + "&appl_type_val=" + appl_type_val;
+                    } else {
+                        var app_ec_id_val = $("#app_ec_id").val();
+                        if (app_ec_id_val === "") {
+                            $('#userEmpIDAlert').show();
+                            isValid = false;
+                            myalert("Information", "Please Type Email-Id Which No is 02.");
+                        }
+                        data = "app_mail_id=" + app_ec_id_val + "&appl_type_val=" + appl_type_val;
+                    }
+                    $.ajax({
+                        url: "getTaDaVefcationCode.htm",
+                        type: "POST",
+                        cache: false,
+                        data: data,
+                        dataType: "json",
+                        beforeSend: function () {
+                            $("body").append("<div id='overlay' style='position:fixed;top:0;left:0;border-radius:0;height:200%;width:100%;z-index:9999'><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><center><img src='img/busy.gif' alt='Processing...' height='150' width='150'/></center></div>");
+                        },
+                        success: function (json)
+                        {
+                            $("#overlay").remove();
+                            myalert("Information", json.msg);
+                            $("#verification_msg").html(json.msg);
+                        }
+                    });
+                }
+            }
+
+            function getApplicationFom() {
+                var appl_type_val = $("#appl_type").val();
+                $('#userOtpAlert').hide();
+                $('#userMailAlert').hide();
+                var mail_id_val = $("#app_mail_id").val();
+                var otp = $('#verification_code').val();
+                $('#mailId').val(mail_id_val);
+                var isValid = true;
+                var data = "";
+                if (appl_type_val === "") {
+                    $('#userMailAlert').show();
+                    isValid = false;
+                    myalert("Information", "Please select applicant type. Which is No 01.");
+                }
+                if (appl_type_val === "OS") {
+                    var mail_id_val = $("#app_mail_id").val();
+                    if (mail_id_val === "") {
+                        $('#userMailAlert').show();
+                        isValid = false;
+                        myalert("Information", "Please Type Applicant Code/Roll No. Which is No 02.");
+                    }
+                    data = "app_mail_id=" + mail_id_val + "&otp=" + otp + "&appl_type_val=" + appl_type_val;
+                } else {
+                    var app_ec_id_val = $("#app_ec_id").val();
+                    if (app_ec_id_val === "") {
+                        $('#userEmpIDAlert').show();
+                        isValid = false;
+                        myalert("Information", "Please Type Email-Id Which is No 02.");
+                    }
+                    data = "app_mail_id=" + app_ec_id_val + "&otp=" + otp + "&appl_type_val=" + appl_type_val;
+                }
+                if (otp === "") {
+                    $('#userOtpAlert').show();
+                    isValid = false;
+                    myalert("Information", "Please Type OTP.");
+                }
+                if (isValid) {
+//                    var data = "app_mail_id=" + mail_id_val + "&otp=" + otp;
+                    $.ajax({
+                        url: "getTaDaForm.htm",
+                        type: "POST",
+                        cache: false,
+                        data: data,
+                        dataType: "json",
+                        success: function (json)
+                        {
+                            if (json.status === "Y") {
+                                $("#app_mail_id").val(window.btoa(window.btoa(($("#app_mail_id").val()))));
+                                $("#app_ec_id").val(window.btoa(window.btoa(($("#app_ec_id").val()))));
+                                $('#taDaRequestForm').submit();
+                            } else {
+                                myalert("Information", json.msg);
+                            }
+                        }
+
+                    });
+                }
+                $("#app_mail_id").val(atob(atob($("#app_mail_id").val())));
+                $("#app_ec_id").val(atob(atob($("#app_ec_id").val())));
+            }
+
+            function getCrfExtLink(val)
+            {
+                window.open(val);
+            }
+
+            function checkApplType() {
+                var appl_type = $("#appl_type").val();
+                if (appl_type === "OS") {
+                    $('#email_t1').show();
+                    $('#email_t').hide();
+                } else {
+                    $('#email_t1').hide();
+                    $('#email_t').show();
+                }
+            }
+
+        </script>
+    </head>
+    
+    <body onload="">
+        <div class="container-fluid">
+            <div class="well well-sm">
+                <h4 style="font-weight:bold; text-align:center;" class="alert alert-info">Journey/Advance/Financial Approval</h4> 
+                <div class=" well well-sm text-info">
+                    <span id="instStFileMsg" style="color: red; background-color: yellow; ">Note: Institute student excluding project fellow are required to obtain leave and journey approval from Academic Section separately before applying through this portal.</span>
+                    <!--                    <div class="alert alert-danger">
+                                            <b>
+                                                <span class="glyphicon glyphicon-hand-right pull-left" style="padding-top: 3px;"></span>&nbsp;&nbsp;
+                                                Please go through this link before using CRF Application Form -&nbsp;
+                                            </b>
+                                            <a id="hrareliefdec" onclick="getCrfExtLink('./docs/User_Manual_for_CRF.pdf')">
+                                                <u>
+                                                    <font color="maroon" style="cursor: pointer;font-size: medium;font-weight:bold;">Click</font>  
+                                                </u>
+                                            </a>                 
+                                        </div>-->
+                    <form id="taDaRequestForm" action="https://erp.iitkgp.ac.in/SricWeb/taDaRequestForm.htm" method="POST">
+                        <input type="hidden" id="userId" name="userId" value="">
+                        <input type="hidden" id="mailId" name="mailId" value="">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="text-muted pull-right" style="color:blue;"><span style="color:red;"> * </span>Indicates Required Field</span>
+                            </div>
+                        </div>                                       
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div id="userMailAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please select :</span> 
+                                </div>
+                                <label for="app_mail_id"><span style="color:red;">*</span>01.Please select Applicant Type:</label>
+                                <select name="appl_type" id="appl_type" class="form-control " onchange="checkApplType()">
+                                    <option value="-1">Please Select One...</option>
+                                    <option value="ST" >Students excluding project fellow</option>
+                                    <option value="IE" >Institute Employee</option>
+                                    <option value="PS" >Project Staff/Fellow</option>
+                                    <option value="OS" >Other Staff</option>
+                                </select>
+                            </div>     
+                            <div class="col-sm-3" id="email_t">
+                                <div id="userEmpIDAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please enter valid email ID:</span> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="app_ec_id"><span style="color:red;">*</span>02.Applicant Roll No/EC/Code:</label>
+                                    <input type="text" class="form-control " name="app_ec_id" id="app_ec_id" placeholder="Applicant Roll No/EC/Code"  />
+                                </div>
+                            </div>     
+                            <div class="col-sm-3" id="email_t1">
+                                <div id="userMailAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please enter valid email ID:</span> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="app_mail_id"><span style="color:red;">*</span>02.Email-Id:</label>
+                                    <input type="text" class="form-control " name="app_mail_id" id="app_mail_id" placeholder="Applicant Emaill-Id"  />
+                                </div>
+                            </div>     
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <br>
+                                    <input class="btn btn-info" type="button" value="Get Verification Code" id="get_code" name="get_code" title="Get Verification Code By Email-Id" onclick="get_otp()">
+                                </div>                                           
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div id="userOtpAlert" class=""  hidden="true">
+                                    <span style="color:red;"> Please enter verification OTP which is sent to your mail address.</span> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="verification_code"><span style="color:red;">*</span>03.Verification Code:</label>
+                                    <input type="password" class="form-control date" name="verification_code" id="verification_code" placeholder="Email-Verification Code"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <br>
+                                    <input class="btn btn-success" type="button" value="Get Application forms" id="recruitment_status_search" title="" name="recruitment_status_search" onclick="getApplicationFom()">
+                                </div>                                           
+                            </div>
+                        </div>&nbsp;&nbsp;<span id="verification_msg" style="color:red;background-color:yellow;"></span>                                         
+                    </form>
+                </div>
+
+            </div>
+    </body>
+</html>

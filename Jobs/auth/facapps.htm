@@ -1,0 +1,640 @@
+
+
+
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">   
+        
+        
+<script>
+    function IsDouble(obj)
+    {
+
+        var strString = obj.value;
+        var prvstrString = strString.substring(0, strString.length - 1);
+        var strValidChars = "0123456789.";
+        var strChar;
+        if (strString.length == 0)
+            return;
+        for (var i = 0; i < strString.length; i++)
+        {
+            strChar = strString.charAt(i);
+            if (strValidChars.indexOf(strChar) == -1)
+            {
+                obj.value = prvstrString;
+                return;
+            }
+        }
+    }
+
+</script>  
+
+<style>
+      .btn-blue {
+                background-color: #1A237E;
+                width: 150px;
+                color: #fff;
+                border-radius: 2px
+            }
+
+            .btn-blue:hover {
+                background-color: #000;
+                cursor: pointer
+            }
+
+            .bg-blue {
+                color: #fff;
+                background-color: #1A237E
+            }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../bootstrap/css/bootstrap-table.min.css">
+
+<link rel="stylesheet" href="../bootstrap/css/bootstrap-datetimepicker.min.css">
+
+         <script src="../jquery/jquery-2.1.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="../bootstrap/js/bootstrap-table.min.js"></script>  
+ 
+<script src="../bootstrap/js/bootstrap-datetimepicker.min.js"></script> 
+
+
+<script>
+   function closeModal(){
+       location.reload();
+   }
+</script>
+
+
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+        <div class="modal-header">
+            <button type="button" class="btn btn-default" onclick="closeModal()">Close</button>
+        </div>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg" id="myModalBody" > </div>
+        </div> 
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+
+        <script>
+            function operateFormatter5(value, row, index)
+            {
+                //if (row.within_date_flag == 'Y') {
+                var View_Details = '<a class="viwbtn" href="javascript:void(0)" title="Apply">' +
+                        '<i class="fa fa-folder"></i> ' +
+                        '</a>';
+                var button_array = [];
+                button_array[button_array.length] = View_Details;
+                return button_array.join('');
+                // }
+            }
+            window.operateEvents5 = {
+                'click .viwbtn': function (e, value, row, index) {
+                    $('#myModalLabel').html('View' + row.advt_no);
+                    window.location.href = 'redirectview.htm?advt_no=' + row.advt_no;
+                }
+            };
+            function operateFormatter4(value, row, index)
+            {
+                if (row.within_date_flag == 'Y') {
+                    var View_Details = '<a class="appbtn" href="javascript:void(0)" title="Apply">' +
+                            '<i class="glyphicon glyphicon-log-in"></i> ' +
+                            '</a>';
+                    var button_array = [];
+                    button_array[button_array.length] = View_Details;
+                    return button_array.join('');
+                }
+            }
+            window.operateEvents4 = {
+                'click .appbtn': function (e, value, row, index) {
+                    $('#myModalLabel').html('Apply' + row.advt_no);
+                    window.location.href = 'redirect.htm?advt_no=' + row.advt_no;
+                }
+            };
+
+            function operateFormatter3(value, row, index)
+            {
+                var View_Details = '<a class="sltbtn" href="javascript:void(0)" title="Selection procedure">' +
+                        '<i class="glyphicon glyphicon-list-alt"></i> ' +
+                        '</a>';
+                var button_array = [];
+                button_array[button_array.length] = View_Details;
+                return button_array.join('');
+            }
+            window.operateEvents3 = {
+                'click .sltbtn': function (e, value, row, index) {
+                    $('#myModalLabel').html('Selection procedure' + row.advt_no);
+                    var iftext = '<iframe src="https://erp.iitkgp.ac.in/Jobs/auth/selPro.htm?advt_no='&#32;+&#32;row.advt_no&#32;+&#32;'" width=100% height=500></iframe>';
+                    $('#myModalBody').html(iftext);
+                    $('#myModal').modal('show');
+                }
+            };
+
+            function operateFormatter2(value, row, index)
+            {
+                var View_Details = '<a class="dwnbtn" href="javascript:void(0)" title="Download Advertisement">' +
+                        '<i class="glyphicon glyphicon-download-alt"></i> ' +
+                        '</a>';
+                var button_array = [];
+                button_array[button_array.length] = View_Details;
+                return button_array.join('');
+            }
+            window.operateEvents2 = {
+                'click .dwnbtn': function (e, value, row, index) {
+                    window.open('showpdf.htm?advt_no=' + row.advt_no + '&reqType=download&file_type=Advertisement', '', '');
+                }
+            };
+            function operateFormatter1(value, row, index)
+            {
+                var View_Details = '<a class="advtbtn" href="javascript:void(0)" title="Advetisement">' +
+                        '<i class="glyphicon glyphicon-open-file"></i> ' +
+                        '</a>';
+
+                var button_array = [];
+                button_array[button_array.length] = View_Details;
+                return button_array.join('');
+            }
+            window.operateEvents1 = {
+                'click .advtbtn': function (e, value, row, index) {
+                    // window.open('showAdvertisementDetails.htm?advt_no=' + row.advt_no);
+                    // alert( row.advt_path);
+                    $('#myModalLabel').html('Advertisement details ' + row.advt_no);
+                    var iftext = '<iframe src="https://erp.iitkgp.ac.in/Jobs/auth/showpdf.htm?advt_no='&#32;+&#32;row.advt_no&#32;+&#32;'&amp;reqType=open&amp;file_type=Advertisement" width=100% height=500></iframe>';
+                    $('#myModalBody').html(iftext);
+                    $('#myModal').modal('show');
+
+                }
+            };
+
+            function operateFormatter(value, row, index)
+            {
+                var View_Details = '<a class="addnbtn" href="javascript:void(0)" title="Addendum">' +
+                        '<i class="fa fa-file-pdf-o"></i> ' +
+                        '</a>';
+
+
+                var button_array = [];
+                button_array[button_array.length] = View_Details;
+                return button_array.join('');
+            }
+            window.operateEvents = {
+                'click .addnbtn': function (e, value, row, index) {
+
+                    $('#myModalLabel').html('Addendum details ' + row.advt_no);
+                    var iftext = '<iframe src="https://erp.iitkgp.ac.in/Jobs/auth/showpdf.htm?advt_no='&#32;+&#32;row.advt_no&#32;+&#32;'&amp;sl_no='&#32;+&#32;row.sl_no&#32;+&#32;'&amp;reqType=open&amp;file_type=Addendum" width=100% height=500></iframe>';
+                    $('#myModalBody').html(iftext);
+                    $('#myModal').modal('show');
+
+                }
+            };
+
+            function goHome() {
+                window.location.href = "apps.htm";
+            }
+
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+
+            $(document).ready(function () {
+                var request1 = $.ajax({
+                    url: "facAppAdvtJson.htm",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    success: function (json)
+                    {
+                        ad();
+                    }
+                });
+                var request2 = $.ajax({
+                    url: "facAppAddendumJson.htm",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    success: function (json)
+                    {
+                        ac();
+                    }
+                });
+            });
+
+            function ad() {
+                $('#advt_tab').DataTable({
+                    //  "processing": true,
+                    //  "serverSide": true,
+                    "autoWidth": false,
+                    "lengthChange": false,
+                    "pageLength": 4,
+                    "order": [[0, "asc"]],
+                    "fixedHeader": {
+                        "header": true,
+                        "footer": false
+                    },
+                    "columnDefs": [
+                        {"width": "300px", "targets": 2},
+                    ],
+
+                });
+
+
+
+            }
+            function ac() {
+
+                $('#addn_tab').DataTable({
+                    //  "processing": true,
+                    //"serverSide": true,
+                    "autoWidth": false,
+                    "lengthChange": false,
+                    "pageLength": 4
+                });
+            }
+
+
+        </script> 
+        <style>
+            tr.something {
+                th {
+                    height:  90px;
+                }
+            }
+            .table.dataTable  {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 11px;
+            }
+        </style>
+    </head>
+    
+    <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+        <div class="col-sm-12">  <style> 
+    .card-container.card {
+        max-width: 500px;
+        padding: 40px 40px;
+    }
+
+    .btn {
+        font-weight: 700;
+        height: 36px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+    }
+
+    /*
+     * Card component
+     */
+    .card {
+        background-color: #F7F7F7;
+        /* just in case there no content*/
+        padding: 20px 25px 30px;
+        margin: 0 auto 25px;
+        margin-top: 50px;
+        /* shadows and rounded borders */
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-img-card {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 10px;
+        display: block;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    /*
+     * Form styles
+     */
+    .profile-name-card {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px 0 0;
+        min-height: 1em;
+    }
+
+    .reauth-email {
+        display: block;
+        color: #404040;
+        line-height: 2;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .form-signin #inputEmail,
+    .form-signin #inputPassword {
+        direction: ltr;
+        height: 44px;
+        font-size: 16px;
+    }
+
+    .form-signin input[type=email],
+    .form-signin input[type=password],
+    .form-signin input[type=text],
+    .form-signin button {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        z-index: 1;
+        position: relative;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .form-signin .form-control:focus {
+        border-color: rgb(104, 145, 162);
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    }
+
+    .btn.btn-signin {
+        /*background-color: #4d90fe; */
+        background-color: rgb(104, 145, 162);
+        /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+        padding: 0px;
+        font-weight: 700;
+        font-size: 14px;
+        height: 36px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: none;
+        -o-transition: all 0.218s;
+        -moz-transition: all 0.218s;
+        -webkit-transition: all 0.218s;
+        transition: all 0.218s;
+    }
+
+    .btn.btn-signin:hover,
+    .btn.btn-signin:active,
+    .btn.btn-signin:focus {
+        background-color: rgb(12, 97, 33);
+    }
+
+    .forgot-password {
+        color: rgb(104, 145, 162);
+    }
+
+    .forgot-password:hover,
+    .forgot-password:active,
+    .forgot-password:focus{
+        color: rgb(12, 97, 33);
+    }
+</style>
+<style>
+    .header_top{
+        width:100%;
+        height:10px;
+        background:#00e3ff;
+    }
+    .menu{
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        width:100%;
+        background:#fff;
+        box-shadow:0 3px 3px rgba(146,146,146,1.00);
+    }
+    .slider{
+        width:100%;
+    }
+
+    .navbar-inner {
+        margin-top: 0;
+        background: #fff;
+        box-shadow: none;
+        border: none;
+        height: 55px;
+    }
+
+    .navbar-inner .brand {
+        margin-top: 14px;
+        display: block;
+    }
+
+    .navbar .nav > li {
+        float: left;
+        height: 75px !important;
+    }
+
+    .navbar .nav > li > a:hover,
+    .navbar .nav > li > a:active,
+    .navbar .nav > li > a:focus,
+    .navbar .nav > li > a.active,
+    .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus, .active-menu {
+        background: #00e3ff !important;
+        color: #000 !important;
+    }
+
+    .navbar .nav > li > a {
+        color: #00e3ff !important;
+        float: none;
+        height: 100%;
+        font-family: 'Roboto', sans-serif;
+        line-height: 70px;
+        padding: 0 15px;
+        text-decoration: none;
+        text-shadow: none;
+        letter-spacing: 2.322px;
+    }
+
+    .sidenav_back {
+        padding-top: 20px;
+        background-color: #CEECF5;
+        height: 75%;
+    }
+    div.ex4 {
+        background-color: lightblue;
+        width: auto;
+        height: 450;
+        overflow: scroll;
+    }
+    .sidenav_add {
+        padding-top: 20px;
+        background-color: white;
+        height: 90%;
+    }
+
+</style>
+<script type="text/javascript">
+    (function (d, t) {
+        var s = d.createElement(t), options = {'domain': '*.iitkgp.ac.in', 'style': '9', 'container': 'entrust-net-seal'};
+        s.src = 'https://seal.entrust.net/sealv2.js';
+        s.async = true;
+        var scr = d.getElementsByTagName(t)[0], par = scr.parentNode;
+        par.insertBefore(s, scr);
+        s.onload = s.onreadystatechange = function () {
+            var rs = this.readyState;
+            if (rs)
+                if (rs != 'complete')
+                    if (rs != 'loaded')
+                        return;
+            try {
+                goEntrust(options)
+            } catch (e) {
+            }
+        };
+    })(document, 'script');
+
+    function closeModal(){
+         parent.location.reload();
+    }
+
+</script> 
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="header_top"></div>
+<div class="menu" style="box-shadow: 4px 4px 6px #0B3861;" >
+    <header class="container">
+        <div class="navbar navbar-inner">
+            <div class="container" > 
+                <div class="collapse navbar-collapse pull-left" >
+                    <div id="entrust-net-seal"></div> 
+                </div>  
+                <div class="navbar-header">
+                    <div class="collapse navbar-collapse pull-left" id="main-menu">
+                        <ul class="nav">
+                            <li class="fadeInDown animated d1 ">
+                                <a href="facapps.htm" class="active" id="home" menuid="0" followlink="true" >  
+                                    <img src="../img/logo.jpg" width="80px" height="85px"/>Indian Institute of Technology Kharagpur
+                                </a>
+                            </li>                            
+                        </ul>                      
+                    </div>                        
+                </div><div class="text-right"><h4>Academic Recruitment Portal</h4> </div>
+                <!--/.nav-collapse -->
+            </div>
+
+    </header>
+
+</div><!--menu-->
+  
+</div>
+        <div class="container-fluid">  
+            <br><br><br><br> <br>
+            <div class="col-sm-12 text-center"></div>
+            <div class="col-sm-12 sidenav_back" >
+                <div class="col-sm-3 sidenav_add">
+                    <div class="col-sm-12 text-center"><h5>Addendum / Corrigendum / etc.</h5></div>
+                    
+
+                    <table id="addn_tab" data-toggle="table" data-url="facAppAddendumJson.htm" data-method="post"   
+                           data-cache="false" data-sort-name="ref_no" data-sort-order="asc" data-show-refresh="true" 
+                           data-show-toggle="true" data-show-columns="true"  data-select-item-name="toolbar1" 
+                           data-height="400" class="table table-striped table-bordered" style="font-size: 12px">
+                        <thead class="bg-success" style="font-size: 12px">
+                            <tr>
+                                
+                                <th data-field="des" data-sortable="true">Dep./Sch./Cen.</th>    
+                                <th data-formatter="operateFormatter" data-align="center" data-events="operateEvents">View</th>
+                            </tr>
+                        </thead>
+                    </table>  
+                </div>
+
+                <div class="col-sm-9 text-left sidenav_add"> 
+                    <div class="col-sm-12 text-center"><h5>List of Advertisement[s] for Faculty Positions</h5></div>
+                    
+                    <table id="addn_tab" data-toggle="table" data-url="facAppAdvtJson.htm" data-method="post"   
+                           data-cache="false" data-sort-name="ref_no" data-sort-order="asc" data-show-refresh="true" 
+                           data-show-toggle="true" data-show-columns="true"  data-select-item-name="toolbar1" 
+                           data-height="400" class="table table-striped table-bordered" style="font-size: 12px" >
+                        <thead class="bg-success" style="font-size: 12px">
+                            <tr>
+                                <th data-field="rownum" data-sortable="true" >#</th>
+                                <th data-field="adv_des" data-sortable="true" >&nbsp;&nbsp;Advertisement&nbsp;&nbsp;</th>
+                                <th data-field="post_long" data-sortable="true">Position</th>
+                                <th data-field="from_date" data-sortable="true">Opening</th>
+                                <th data-field="to_date" data-sortable="true">Closing</th>
+                                <th data-formatter="operateFormatter1" data-align="center" data-events="operateEvents1">View Ad..</th>
+                                <th data-formatter="operateFormatter2" data-align="center" data-events="operateEvents2">Dwn. Ad..</th>
+                                <th data-formatter="operateFormatter3" data-align="center" data-events="operateEvents3">Sel...</th>
+                                <th data-formatter="operateFormatter4" data-align="center" data-events="operateEvents4">Apply</th>
+                                <th data-formatter="operateFormatter5" data-align="center" data-events="operateEvents5">Print..</th>
+                            </tr>
+                        </thead>
+                    </table> 
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 text-center" >   <br></div>
+        <div class="col-lg-12 text-center" style="font-size: 12px">  <div class="bg-blue py-4"><div class="row px-3"><font color="white"><i><p>Note: Dep./Sch./Cen.- Department/School/Centre. #-Serial number[Default]. View Ad..-View Advertisement. Dwn. Ad..-Download Advertisement. Sel...-Selection Procedure. Print..-Print/Download Application</p></i></div></div></div> 
+
+        <div class="col-sm-12 text-center" > <a  onclick="goHome()" class="glyphicon glyphicon-step-backward"></a> </div>
+
+        <div class="col-sm-12"> <br> <!-- Footer -->
+
+   <style>
+       .footer{
+  background: #00e3ff;
+  color:black;
+  
+  .links{
+    ul {list-style-type: none;}
+    li a{
+      color: white;
+      transition: color .2s;
+      &:hover{
+        text-decoration:none;
+        color:#4180CB;
+        }
+    }
+  }  
+  .about-company{
+    i{font-size: 25px;}
+    a{
+      color:white;
+      transition: color .2s;
+      &:hover{color:#4180CB}
+    }
+  } 
+  .location{
+    i{font-size: 18px;}
+  }
+  .copyright p{border-top:1px solid rgba(255,255,255,.1);} 
+}
+   </style>
+<div class="mt-5 pt-5 pb-5 footer" >
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-xs-12 about-company">
+      
+      <p class="pr-5 text-white-50"><br> 
+</p>
+      
+    </div>
+   
+  </div>
+</div>
+</div>
+  
+</div>
+    </body>
+</html>
+

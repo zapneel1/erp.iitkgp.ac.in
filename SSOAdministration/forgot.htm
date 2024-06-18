@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+    <head>
+        <title>ERP System, IIT Kharagpur</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css">
+        <script src="jquery/jquery-1.10.2.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+
+        <script>
+            $(function () {
+                $("#user_code_chpass").blur(function () {
+                    var user_code_chpass = $("#user_code_chpass").val();
+                    if (user_code_chpass.length >= 5) {
+                        var request = $.ajax({
+                            url: "getUserSecurityQues.htm",
+                            type: "POST",
+                            cache: false,
+                            data: "user_code=" + user_code_chpass,
+                            dataType: "text",
+                            success: function (response) {
+                                if (response !== '') {
+                                    var arr = response.split("<#;#>");
+                                    var inhtml = "";
+                                    for (var i = 0; i < arr.length; i++) {
+                                        var arr1 = arr[i].split("<#:#>");
+                                        var html = "<div class='form-group'>" +
+                                                "<label for='answer" + arr1[0] + "' class='col-lg-4 control-label'>" + arr1[1] + "</label>" +
+                                                "<div class='col-lg-6'>" +
+                                                "<input class='form-control hidden' id='question" + arr1[0] + "' name='question' placeholder='Question ID' value='" + arr1[0] + "' readonly type='text' required>" +
+                                                "<input class='form-control' id='answer" + arr1[0] + "' name='answer' placeholder='Enter answer here' type='password' required>" +
+                                                "</div>" +
+                                                "</div>";
+                                        inhtml += html;
+                                    }
+                                    $("#secQuesDIV_chpass").html(inhtml);
+                                    $("#secQuesDIV_chpass").removeClass("hidden");
+                                    $("#secQuesConDIV_chpass").removeClass("hidden");
+                                } else {
+                                    $("#secQuesDIV_chpass").html("");
+                                    $("#secQuesDIV_chpass").addClass("hidden");
+                                    $("#secQuesConDIV_chpass").addClass("hidden");
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+            //Password validation
+            $(function () {
+                $("#password1").blur(function () {
+                    if ($("#password1").val() !== "") {
+                        if ($("#password1").val().length < 8)
+                        {
+                            $("#password_msg").html('Password should be minimum 8 character length');
+                            $("#password_msg").removeClass("hidden");
+                        } else {
+                            $("#password_msg").html('');
+                            $("#password_msg").addClass("hidden");
+                        }
+                    }
+                });
+            });
+
+            $(function () {
+                $("#confirm_password").blur(function () {
+                    if ($("#confirm_password").val() !== "") {
+                        if ($("#password1").val() !== $("#confirm_password").val())
+                        {
+                            $("#password_msg").html('Confirm password does not match with passowrd');
+                            $("#password_msg").removeClass("hidden");
+                            $("#confirm_password").val('');
+                        } else {
+                            $("#password_msg").html('');
+                            $("#password_msg").addClass("hidden");
+                        }
+                    }
+                });
+            });
+
+            $(function () {
+                $("#form_chpass").submit(function (event) {
+                    event.preventDefault();
+                    var postData = $(this).serialize();
+                    var request = $.ajax({
+                        url: "changePassword.htm",
+                        type: "POST",
+                        cache: false,
+                        data: postData,
+                        dataType: "text",
+                        success: function (response) {
+                            var arr = response.split(":");
+                            if (arr[0] === "ERROR") {
+                                $("#status_msg_chpass").text(arr[1]);
+                                $("#status_msg_chpass_div").removeClass("hidden");
+                                $("#status_msg_chpass_div").addClass("alert-danger");
+                            } else if (arr[0] === "SUCCESS") {
+                                $("#status_msg_chpass").text(arr[1]);
+                                $("#status_msg_chpass_div").removeClass("hidden");
+                                $("#status_msg_chpass_div").addClass("alert-success");
+                                $('#form_chpass')[0].reset();
+                            }
+                        }
+                    });
+                });
+            });
+
+            $(function () {
+                $("#form_chques").submit(function (event) {
+                    event.preventDefault();
+                    var postData = $(this).serialize();
+                    var request = $.ajax({
+                        url: "changeQuestions.htm",
+                        type: "POST",
+                        cache: false,
+                        data: postData,
+                        dataType: "text",
+                        success: function (response) {
+                            var arr = response.split(":");
+                            if (arr[0] === "ERROR") {
+                                $("#status_msg_chques").text(arr[1]);
+                                $("#status_msg_chques_div").removeClass("hidden");
+                                $("#status_msg_chques_div").addClass("alert-danger");
+                            } else if (arr[0] === "SUCCESS") {
+                                $("#status_msg_chques").text(arr[1]);
+                                $("#status_msg_chques_div").removeClass("hidden");
+                                $("#status_msg_chques_div").addClass("alert-success");
+                                $('#form_chques')[0].reset();
+                            }
+                        }
+                    });
+                });
+            });
+
+            $(function () {
+                var request = $.ajax({
+                    url: "getStakeholderTypes.htm",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    success: function (json) {
+                        $.each(json, function (index, item) {
+                            $("#user_type_reset").append("<option value=" + item.UserType + ">" + item.UserTypeDesc + "</option>");
+                        });
+                    }
+                });
+            });
+
+            $(function () {
+                $("#user_type_reset").on('change', function () {
+                    $("#dbSecQuesDIV_reset").html("");
+                    $("#user_code_reset").val("");
+                    var user_type_desc_val = $("#user_type_reset").val();
+                    if (user_type_desc_val !== "") {
+                        var request = $.ajax({
+                            url: "getDBSecurityQues.htm",
+                            type: "POST",
+                            cache: false,
+                            data: "user_type=" + user_type_desc_val,
+                            dataType: "text",
+                            success: function (response) {
+                                if (response !== '') {
+                                    var arr = response.split(";");
+                                    var inhtml = "";
+                                    for (var i = 0; i < arr.length; i++) {
+                                        var arr1 = arr[i].split(":");
+                                        var html = "<div class='form-group'>" +
+                                                "<label for='dbQuesAns" + arr1[0] + "' class='col-lg-5 control-label'>" + arr1[1] + "</label>" +
+                                                "<div class='col-lg-5'>" +
+                                                "<input class='form-control hidden' id='dbQuesId" + arr1[0] + "' name='dbQuesId' placeholder='Question ID' value='" + arr1[0] + "' readonly type='text' required>" +
+                                                "<input class='form-control' id='dbQuesAns" + arr1[0] + "' name='dbQuesAns' placeholder='Enter answer here' type='text' required>" +
+                                                "</div>" +
+                                                "</div>";
+                                        inhtml += html;
+                                    }
+                                    $("#dbSecQuesDIV_reset").html(inhtml);
+                                }
+                                $("#reset_button_div").removeClass("hidden");
+                            }
+                        });
+                    } else {
+                        $("#reset_button_div").addClass("hidden");
+                    }
+                });
+            });
+
+
+            $(function () {
+                $("#form_reset").submit(function (event) {
+                    event.preventDefault();
+                    var postData = $(this).serialize();
+                    var request = $.ajax({
+                        url: "reset.htm",
+                        type: "POST",
+                        cache: false,
+                        data: postData,
+                        dataType: "text",
+                        success: function (response) {
+                            var arr = response.split(":");
+                            if (arr[0] === "ERROR") {
+                                $("#status_msg_reset").text(arr[1]);
+                                $("#status_msg_reset_div").removeClass("hidden");
+                                $("#status_msg_reset_div").addClass("alert-danger");
+                            } else if (arr[0] === "SUCCESS") {
+                                $("#status_msg_reset").text(arr[1]);
+                                $("#status_msg_reset_div").removeClass("hidden");
+                                $("#status_msg_reset_div").addClass("alert-success");
+                                $('#form_reset')[0].reset();
+                            }
+                        }
+                    });
+                });
+            });
+
+//            $(function() {
+//                $('.getotp').click(function() {
+//                    //alert('nnnnnnn');
+//                    var data = 'loginid='+$('#user_code_chpass').val();
+//                    var request = $.ajax({
+//                        url: "getEmilOTP.htm",
+//                        type: "POST",
+//                        cache: false,
+//                        data: data,
+//                        dataType: "json",
+//                        success: function(json)
+//                        {
+//                            alert(json.msg);
+//                        }
+//
+//                    });
+//                });
+//            });
+
+            function getEmailOTP2(typeee) {
+                var data = '';
+                if (typeee === 'PA') {
+                    data = $("#form_chpass").serialize();
+                }
+                if (typeee === 'SY') {
+                    data = $("#form_chques").serialize();
+                }
+                if (typeee === 'RE') {
+                    data = $("#form_reset").serialize();
+                }
+//                var data = 'typeee=' + typeee + '&loginid=' + loginIdd + '&pass=' + pass;
+                var request = $.ajax({
+                    url: "getEmilOTP.htm",
+                    type: "POST",
+                    cache: false,
+                    data: data,
+                    dataType: "json",
+                    success: function (json)
+                    {
+                        if (typeee === 'PA') {
+                            $('#getotp1').text('Resend OTP');
+                            $('#submit_chpass').removeClass('hidden');
+                        }
+                        if (typeee === 'SY') {
+                            $('#getotp2').text('Resend OTP');
+                            $('#submit_chques').removeClass('hidden');
+                        }
+                        if (typeee === 'RE') {
+                            $('#getotp3').text('Resend OTP');
+                            $('#submit_reset').removeClass('hidden');
+                        }
+                        alert(json.msg);
+                    }
+                });
+            }
+            
+            
+//            function getEmailOTP2(typeee) {
+//                var loginIdd = '';
+//                var pass = '';
+//                if (typeee === 'PA') {
+//                    loginIdd = $('#user_code_chpass').val();
+//                }
+//                if (typeee === 'SY') {
+//                    loginIdd = $('#user_code_chques').val();
+//                    pass = $('#password_chques').val();
+//                }
+//                if (typeee === 'RE') {
+//                    loginIdd = $('#user_code_reset').val();
+//                }
+//                var data = 'typeee=' + typeee + '&loginid=' + loginIdd + '&pass=' + pass;
+//                var request = $.ajax({
+//                    url: "getEmilOTP.htm",
+//                    type: "POST",
+//                    cache: false,
+//                    data: data,
+//                    dataType: "json",
+//                    success: function (json)
+//                    {
+//                        if (typeee === 'PA') {
+//                            $('#getotp1').text('Resend OTP');
+//                            $('#submit_chpass').removeClass('hidden');
+//                        }
+//                        if (typeee === 'SY') {
+//                            $('#getotp2').text('Resend OTP');
+//                            $('#submit_chques').removeClass('hidden');
+//                        }
+//                        if (typeee === 'RE') {
+//                            $('#getotp3').text('Resend OTP');
+//                            $('#submit_reset').removeClass('hidden');
+//                        }
+//                        alert(json.msg);
+//                    }
+//                });
+//            }
+
+//            function getEmailOTP(typeee){
+//                alert(typeee);
+//                var loginIdd='';                
+//                if(typeee==='PA'){loginIdd=$('#user_code_chpass').val();}
+//                if(typeee==='SY'){loginIdd=$('#user_code_chques').val();}
+//                if(typeee==='RE'){loginIdd=$('#user_code_reset').val(); }               
+//                var data = 'loginid='+loginIdd);
+//                alert(data);
+//                    var request = $.ajax({
+//                        url: "getEmilOTP.htm",
+//                        type: "POST",
+//                        cache: false,
+//                        data: data,
+//                        dataType: "json",
+//                        success: function(json)
+//                        {
+//                            alert(json.msg);
+//                        }
+//
+//                    });
+//            }
+        </script>
+    </head>
+    <body>
+        <div class="panel with-nav-tabs panel-success" id="tabs">
+            <div class="navbar navbar-default" style='margin: 0px'>
+                <div class="navbar-header">
+                    <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand hidden-lg hidden-md" href="forgot.htm#"><label>Forgot</label></a>
+                </div>
+                <div style="height: 1px;" aria-expanded="false" class="navbar-collapse collapse" id='bs-example-navbar-collapse-1'>
+                    <ul id="moduleUL" class="nav navbar-nav" style="margin-top: 5px; margin-bottom: 5px;">
+                        <li class="active"><a href="forgot.htm#chpass" data-toggle="tab">Change Password</a></li>
+                        <li><a href="forgot.htm#chques" data-toggle="tab">Change Security Questions</a></li>
+                        <li><a href="forgot.htm#resetlogin" data-toggle="tab">Reset Account</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="chpass">
+                        <form id='form_chpass' class="form-horizontal">
+                            <fieldset>
+                                <legend>Change Password</legend><br>
+                                <p>I know my security question and answer</p>
+                                <div id="status_msg_chpass_div" class="alert hidden">
+                                    <strong><label id="status_msg_chpass"></label></strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_code_chpass" class="col-lg-4 control-label">Your Login Id</label>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" id="user_code_chpass" name="user_code_chpass" placeholder="Enter your login id and press TAB" type="text" required>
+                                    </div>
+                                </div>
+                                <div id="secQuesDIV_chpass" class="hidden"></div>
+                                <div id="secQuesConDIV_chpass" class="hidden">
+                                    <div class="form-group">
+                                        <label for="password1" class="col-lg-4 control-label">New Password</label>
+                                        <div class="col-lg-6">
+                                            <input class="form-control" id="password1" name="password1" placeholder="Enter your new password here" type="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm_password" class="col-lg-4 control-label">Confirm New Password</label>
+                                        <div class="col-lg-6">
+                                            <input class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter your new password here" type="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 control-label">Update Passphrase for Digital Signature</label>
+                                        <div class="col-lg-1 form-inline" >
+                                            <label for="rad1"><input class="form-control" type="radio" name="update_passphrase" id="rad1" value="Y"/>&nbsp;Yes</label>
+                                        </div>
+                                        <div class="col-lg-1 form-inline" >
+                                            <label for="rad2"><input class="form-control" type="radio" name="update_passphrase" id="rad2" value="N" checked/>&nbsp;No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 control-label"></label>
+                                        <div class="col-lg-8 form-inline" >
+                                            <h5 style="color: red">If passphrase is updated then digital certificate has to be regenerated. Please contact ERP to generate the same.</h5>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row">                                        
+                                        <div class="col-lg-12">
+                                            <input id="typeee" name="typeee" placeholder="typeee" type="hidden" value="PA" />
+                                            <button id="getotp1" type="button" class="btn btn-primary getotp"  onclick="getEmailOTP2('PA');">Send OTP</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row row-margin-05">
+<!--                                        <div class="col-lg-4">
+                                            <label for="email_otp1" class="control-label">Email OTP</label>
+                                        </div>-->
+                                        <div class="col-lg-4 row-margin-05">
+                                            <input class="form-control" id="email_otp1" name="email_otp" placeholder="Email OTP" type="password" required>
+                                        </div>
+                                    </div>
+                                    <div id="password_msg" class="alert alert-danger hidden"></div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <button id="submit_chpass" type="submit" class="btn btn-primary hidden">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="chques">
+                        <form id='form_chques' class="form-horizontal">
+                            <fieldset>
+                                <legend>Change Security Questions</legend><br>
+                                <p>I know my login password</p>
+                                <div id="status_msg_chques_div" class="alert hidden">
+                                    <strong><label id="status_msg_chques"></label></strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_code_chques" class="col-lg-4 control-label">Your Login Id</label>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" id="user_code_chques" name="user_code_chques" placeholder="Enter Login Id (in all caps)" type="text" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_chques" class="col-lg-4 control-label">Your Login Password</label>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" id="password_chques" name="password_chques" placeholder="Your Login Password" type="password" required>
+                                    </div>
+                                </div>
+                                <legend>Security Questions</legend><br>
+                                <div class="row-fluid">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <input class="form-control" id="question1" name="question" placeholder="First question" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <input class="form-control" id="answer1" name="answer" placeholder="Answer of first question" type="password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <input class="form-control" id="question2" name="question" placeholder="Second question" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <input class="form-control" id="answer2" name="answer" placeholder="Answer of second question" type="password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <input class="form-control" id="question3" name="question" placeholder="Third question" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <input class="form-control" id="answer3" name="answer" placeholder="Answer of third question" type="password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">                                        
+                                    <div class="col-lg-12">
+                                        <input id="typeee" name="typeee" placeholder="typeee" type="hidden" value="SY" />
+                                        <button id="getotp2" type="button" class="btn btn-primary getotp" onclick="getEmailOTP2('SY');">Send OTP</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row row-margin-05">
+<!--                                    <div class="col-lg-4">
+                                        <label for="email_otp2" class="control-label">Email OTP</label>
+                                    </div>-->
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="email_otp2" name="email_otp" placeholder="Email OTP" type="password" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <button id="submit_chques" type="submit" class="btn btn-primary hidden">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="resetlogin">
+                        <form id='form_reset' class="form-horizontal">
+                            <fieldset>
+                                <legend>Reset Account</legend><br>
+                                <p>I forget both login password and security question answer</p>
+                                <div id="status_msg_reset_div" class="alert hidden">
+                                    <strong><label id="status_msg_reset"></label></strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_type_reset" class="col-lg-5 control-label">Stakeholder Type</label>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" id="user_type_reset" name="user_type_reset" required>
+                                            <option value="">Please Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_code_reset" class="col-lg-5 control-label">Your Login Id</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" id="user_code_reset" name="user_code_reset" placeholder="Enter your login id (in all caps)" type="text" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dob_reset" class="col-lg-5 control-label">Date of birth</label>
+                                    <div id="datetimepicker_reset" class="input-append col-lg-5">
+                                        <input id='dob_reset' name="dob_reset" class="add-on form-control" data-format="dd-MM-yyyy" type="text" placeholder="Click here to get calendar" readonly required></input>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker_reset').datetimepicker({
+                                            pickTime: false
+                                        });
+                                    });
+                                </script>
+                                <div id="dbSecQuesDIV_reset"></div>
+                                <div class="form-group row">                                    
+                                    <div class="col-lg-12">
+                                        <input id="typeee" name="typeee" placeholder="typeee" type="hidden" value="RE" />                                            
+                                        <button id="getotp3" type="button" class="btn btn-primary getotp"  onclick="getEmailOTP2('RE');">Send OTP</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row row-margin-05"> 
+<!--                                    <div class="col-lg-4">
+                                        <label for="email_otp3" class="control-label">Email OTP</label>
+                                    </div>-->
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="email_otp3" name="email_otp" placeholder="Email OTP" type="password" required>
+                                    </div>
+                                </div>
+                                <div id="reset_button_div" class="form-group hidden">
+                                    <div class="col-lg-12">
+                                        <button id="submit_reset" type="submit" class="btn btn-primary hidden">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

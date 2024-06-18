@@ -1,0 +1,430 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Experience Certificate Request</title>
+
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">        
+        <link rel="stylesheet" href="bootstrap/css/datepicker.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-table.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-select.css">
+        <link rel="stylesheet" href="bootstrap/css/fileinput.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrp-support-abhi.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-dialog.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+        <script src="bootstrap/js/jquery-1.11.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="bootstrap/js/bootstrap-table.js"></script>
+        <script src="bootstrap/js/bootstrap-datetimepicker.min.js"></script> 
+        <script src="bootstrap/js/bootstrap-select.js"></script>
+        <script src="bootstrap/js/somesh-bootstrap-select-loader.js"></script>
+        <script src="bootstrap/js/bootstrap-dialog.js"></script>
+        <script src="bootstrap/export/jquery.base64.js"></script>
+        <script src="bootstrap/export/tableExport.js"></script>
+        <script src="bootstrap/export/bootstrap-table-export.js"></script>
+        <script src="bootstrap/js/fileinput.min.js"></script>
+        <script src="bootstrap/js/custom-methods.js"></script>
+        <script src="bootstrap/js/bootstrap-dialog.js"></script>
+
+        <style>
+            .well {
+                background: #FFF;
+            }
+        </style>
+
+        <script>
+
+            var sricId = "";
+
+            $(function () {
+                $("#emplId").val("");
+                $("#empdob").val("");
+                $("#txSelectId").hide();
+                $("#buttonSendCode").hide();
+                $("#verifyArea").hide();
+                $("#searchExpr").hide();
+                $("#certireq").hide();
+                $("#combdnld").hide();
+
+                $("#empdob").datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true,
+                });
+
+                $("#certireq").click(function () {
+
+                    var data = $('#experiencetable').bootstrapTable('getSelections');
+                    $.ajax({
+                        url: "saveExperienceCertificateRequest.htm",
+                        type: "POST",
+                        contentType: "application/json",
+                        cache: false,
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function (json)
+                        {
+                            getExperienceList();
+                            $("#verification_msg").html(json.msg);
+                        },
+                        error: function () {
+                            alert('request failed');
+                        }
+                    });
+                });
+                $("#combdnld").click(function () {
+                    window.open('downloadCertificateByte.htm?certSl=0&certId=0&sricId=' + sricId);
+                });
+            });
+
+
+
+            function getExperienceList() {
+                if ($("#vrcode").val() === "") {
+                    $("#verification_msg").html("Please Type Varification Code from Your Email Registered at SRIC");
+                } else {
+
+                    var jn = {};
+                    $.ajax({
+                        url: "getExperienceDetails.htm?vrcode=" + $("#vrcode").val(),
+                        type: "GET",
+                        cache: false,
+                        async: false,
+                        beforeSend: function () {
+                            $("body").append("<div id='overlay' style='position:absolute;top:0;left:0;height:200%;width:100%;z-index:999'><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><center><img src='img/busy.gif' alt='Loadingg...' height='150' width='150'/></center></div>");
+                        },
+                        success: function (json)
+                        {
+                            jn = json;
+                            $("#overlay").remove();
+                        },
+                        error: function () {
+                            $("#verification_msg").html("Request Error");
+                            $("#overlay").remove();
+                        }
+                    });
+
+                    if (jn.status === "N") {
+                        $("#verification_msg").html(jn.msg);
+                        jn.data = {};
+                        $('#experiencetable').bootstrapTable('load', jn.data);
+                    } else
+                    {
+                        if (jn.requestRemain == 0) {
+                            $("#expmsg").html("You have requested your all experience certificates. If any project is not listed here then contact with SRIC office.");
+                            $("#certireq").hide();
+                        } else {
+                            $("#expmsg").html("Please select your required experiences from the list below to generate certificate. If any project is not listed here then contact with SRIC office.");
+                            $("#certireq").show();
+                        }
+
+                        $("#overlay").remove();
+                        $('#experiencetable').bootstrapTable('load', jn.data);
+                        $("#verification_msg").html(jn.msg);
+                    }
+                }
+            }
+
+            function chbxFormatter(value, row, index) {
+
+                if (row.slNo != 0) {
+                    return {
+                        disabled: true,
+                        checked: true
+                    }
+                }
+
+                return value;
+
+            }
+
+
+
+            function approvalStatusFormatter(value, row, index) {
+                var html = '<div>';
+
+                if (row.status == "") {
+                    html += '<span class="glyphicon glyphicon-ban-circle"></span>';
+
+                } else {
+
+                    html += '<span class="badge badge-danger" style="background-color: #086379;">Requested On</span><br/>' + row.requestDate + '<br/>';
+
+                    if (row.status == "N" && row.projStat == "N") {
+                        html += '<span class="badge badge-danger" style="background-color: #e64219;">Pending PI Approval</span><br/>';
+                    }
+                    if ((row.status == "N" && row.projStat == "Y") || (row.status == "P" && row.projStat == "N")) {
+                        html += '<span class="badge badge-danger" style="background-color: #e64219;">Pending SRIC Staff Approval</span><br/>';
+                    }
+                    if (row.status == "S") {
+                        html += '<span class="badge badge-danger" style="background-color: #e64219;">Pending AR or DR Approval</span><br/>';
+                    }
+                    if (row.status == "R") {
+                        $("#combdnld").show();
+                        html += '<button class="indvdnld btn btn-dark btn-sm text-nowrap" title="Download Individual Format Certificate"><i class="fa fa-check"></i>Individual Certificate</button><br/>';
+                        html += '<span class="badge badge-success" style="background-color: #66cc00;">Approved</span><br/>';
+
+                    }
+
+                    if (row.remarks != "") {
+                        let rmList = row.remarks.split("~~");
+                        let rmItem;
+                        let emid;
+                        let ut;
+                        let rm;
+                        rmList.forEach(function (rmObject) {
+                            rmItem = rmObject.split("``");
+                            emid = rmItem[0];
+                            if (rmItem[1] == "P")
+                                ut = "PI Remark";
+                            if (rmItem[1] == "S")
+                                ut = "SRIC Staff Remark";
+                            if (rmItem[1] == "R")
+                                ut = "AR or DR Remark";
+                            rm = rmItem[2];
+
+                            html += '<span class="badge badge-info" style="background-color:#4A235A;">' + ut + ' (' + emid + ') </span><br/>';
+                            html += '<span>' + rm + '</span><br/>';
+
+
+                        });
+                    }
+                    
+                }
+                html += '</div>';
+                return [html].join('');
+            }
+
+
+            window.approvalStatusEvents = {
+                'click .indvdnld': function (e, value, row, index) {
+                    window.open('downloadCertificateByte.htm?certSl=' + row.slNo + '&certId=' + row.certId + '&sricId=' + row.sricId);
+                }   
+            };
+
+
+            function getsricId() {
+
+                if ($("#emplId").val().length != 0) {
+
+                    $.ajax({
+                        url: "findEmplId.htm?emplId=" + $("#emplId").val() + "&empdob=" + $("#empdob").val(),
+                        type: "GET",
+                        cache: false,
+                        dataType: "json",
+                        success: function (json)
+                        {
+                            if (json.status === 'Y') {
+                                $("#txEmplId").hide();
+                                $("#validateId").prop('disabled', true);
+                                $("#txSelectId").show();
+                                $("#buttonSendCode").show();
+                                $.each(json.sricIdList, function (key, value) {
+                                    $('#sricId')
+                                            .append($("<option></option>")
+                                                    .attr("value", value)
+                                                    .text(value));
+                                });
+                            }
+
+                            $("#verification_msg").html(json.msg);
+                        }
+                    });
+                } else {
+                    $("#verification_msg").html("SRIC Id or Registered Email field can not be blank");
+                }
+            }
+
+            function getotp() {
+                sricId = $("#sricId").val();
+                $.ajax({
+                    url: "genotp.htm?sricId=" + $("#sricId").val(),
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    success: function (json)
+                    {
+                        if (json.status === 'Y') {
+                            $('#sendCode').prop('disabled', true);
+                            $("#empdob").attr("disabled", true);
+                            $("#sricId").attr("disabled", true);
+                            $("#verifyArea").show();
+                            $("#searchExpr").show();
+                            $("#vrcode").val('');
+                        }
+
+                        $("#verification_msg").html(json.msg);
+                    }
+                });
+            }
+
+            function emplNameIdFormatter(value, row, index) {
+                var html = '<div>';
+                html += row.emplName;
+                html += '<br/>(' + row.sricId + ')';
+                html += '</div>';
+                return [html].join('');
+
+            }
+
+            function projNameFormatter(value, row, index) {
+
+                var html = '<div>';
+                html += row.projName;
+                html += '<br/><span class="badge badge-info">Code</span><br/>';
+                html += row.userProjectCode;
+                html += '</div>';
+                return [html].join('');
+
+            }
+
+            function projSponFormatter(value, row, index) {
+                var html = '<div>';
+                html += row.projSpon;
+                html += '<br/><span class="badge badge-info">Address</span><br/>';
+                html += row.projectSponsorAddress;
+                html += '</div>';
+                return [html].join('');
+
+            }
+            
+
+            function getSRICEXPExtLink(val)
+            {
+                window.open(val);
+            }
+
+
+
+
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="well well-sm">
+                <h4 style="font-weight:bold; text-align:center;" class="alert alert-info">Request for Experience Certificate</h4> 
+                <div class="alert alert-danger">
+
+                    <b>
+                        <span class="glyphicon glyphicon-hand-right pull-left" style="padding-top: 3px;"></span>&nbsp;&nbsp;
+                        Please go through this link before using online Experience Certificate -&nbsp;
+                    </b>
+                    <a id="hrareliefdec" onclick="getSRICEXPExtLink('./docs/Online_Experience_Certificate_Application_for_Project_Staff_external_link.pdf')">
+                        <u>
+                            <font color="maroon" style="cursor: pointer;font-size: medium;font-weight:bold;">Click</font>  
+                        </u>
+                    </a>                 
+                </div>
+
+
+            </div>
+
+            <div class=" well well-sm text-info">
+                <form id="recruitment_status_frm">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <span class="text-muted pull-right" style="color:blue;"><span style="color:red;">Note: Applicants will get Maximum 5 times Verification Code in a day<br></span>(*)Indicates Required Field</span>
+                        </div>
+                    </div><br>                                       
+
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <div class="form-group" id="txEmplId">
+                                <label for="emplId"><span style="color:red;">*</span>SRIC Id or Registered Email</label>
+                                <input type="text" class="form-control" name="emplId" id="emplId" placeholder="Enter SRIC Id or Registered Email"  />
+                            </div>
+                            <div class="form-group" id="txSelectId">
+                                <label for="sricId"><span style="color:red;">*</span>Select SRIC Id</label>                                    
+                                <select class="form-control" name="sricId" id="sricId"></select>
+                            </div>                                
+                        </div>
+                        <div class="col-sm-2">                                
+                            <label for="empdob"><span style="color:red;">*</span>Date of Birth</label>
+                            <input type="text" class="form-control date" name="empdob" id="empdob" placeholder="Enter Date of Birth" readonly />                                                                                              
+                        </div>
+
+                        <div class="col-sm-1">
+                            <br>
+                            <div class="form-group" id="buttonValidateId">                                    
+                                <input class="btn btn-danger btn-sm" type="button" value="Validate ID" id="validateId" name="validateId" title="Validate ID" onclick="getsricId()">
+                            </div>                          
+                        </div>
+                        <div class="col-sm-1">
+                            <br>                                                               
+                            <div class="form-group" id="buttonSendCode">                                    
+                                <input class="btn btn-success btn-sm" type="button" value="Get OTP" id="sendCode" name="sendCode" title="Get OTP" onclick="getotp()">
+                            </div>                                
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-group" id="verifyArea">
+                                <label for="vrcode"><span style="color:red;">*</span>Enter code from you email</label>
+                                <input type="text" class="form-control date" name="vrcode" id="vrcode" placeholder="Verification Code"/>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <br>                                
+                            <input class="btn btn-info" type="button" value="Search" id="searchExpr" title="Search My Experience List" name="searchExpr" onclick="getExperienceList()">
+                        </div>                            
+                    </div>&nbsp;&nbsp;<span id="verification_msg" style="color:red;background-color:yellow;"></span>                                         
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8">
+                <div id="expmsg" class="p-3 mb-2 bg-success text-white text-center"></div>                        
+            </div>
+            <div class="col-sm-2">              
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <button type="button" id="certireq" class="btn btn-warning pull-left"> <i class="fa fa-arrow-circle-right"></i>Certificate Request</button>                    
+            </div>
+            <div class="col-sm-6">
+                <span class="text-danger ml-5 msg" id="wrnmsg"></span>
+            </div>
+            <div class="col-sm-3">
+            </div>
+        </div>
+
+        <div class="form-group text-justify">
+            <table id="experiencetable" class="table table-striped" data-cache="false" data-search="true" data-search-align="left" data-toggle="table" data-filter-control="true" data-sort-order="asc" data-show-refresh="true" data-show-columns="false"  
+                   data-show-toggle="false" data-show-export="true"  data-pagination="true" data-height="500" data-page-size="50">
+                <thead class="bg-primary">                                               
+                    <tr>
+                        <th data-field="chbx" data-checkbox="true" data-align="center" data-formatter="chbxFormatter">chbx</th>
+                        <th data-field="emplNameId" data-visible="true" data-align="center" data-formatter="emplNameIdFormatter">Name(SRIC ID)</th>
+                        <th data-field="fromDate" data-visible="true" data-align="center">Joining Date</th>
+                        <th data-field="exptoDate" data-visible="true" data-align="center">Release Date</th>
+                        <th data-field="desgName" data-visible="true" data-align="center">Designation</th>
+                        <th data-field="projName" data-visible="true" data-align="left" data-formatter="projNameFormatter">Project</th>
+                        <th data-field="projSpon" data-visible="true" data-align="left" data-formatter="projSponFormatter">Sponsor</th>
+                        <th data-field="pi" data-visible="true" data-align="center">PI</th>                            
+                        <th data-field="deptName" data-visible="true" data-align="center">Department Name</th>
+                        <th data-field="approvalStatus" data-visible="true" data-align="center" data-formatter="approvalStatusFormatter" data-events="approvalStatusEvents">Approval Status</th>                            
+                    </tr>                             
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">                                        
+            </div>
+            <div class="col-sm-2">
+                <button type="button" id="combdnld" class="btn btn-dark pull-center" title="Download Combined Format Certificate"> Combined Certificate <i class="fa fa-arrow-down" aria-hidden="true"></i></button>                    
+            </div>                
+            <div class="col-sm-5">
+            </div>
+        </div>
+    </div>       
+</body>
+</html>
